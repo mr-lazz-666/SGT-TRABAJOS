@@ -1,0 +1,50 @@
+name: SGT - prueba del instalador Windows
+on:
+  push:
+    branches: [pruebas/instalador-windows]
+    paths: ['pruebas/instalador-windows/SGT_Setup.exe.enc']
+permissions:
+  contents: read
+jobs:
+  instalador:
+    runs-on: windows-2022
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Preparar herramientas de prueba
+        run: |
+          python -m pip install playwright
+          python -m playwright install chromium
+      - name: Descifrar instalador
+        shell: bash
+        env:
+          INSTALLER_KEY: ${{ secrets.SGT_INSTALLER_KEY }}
+        run: |
+          set -euo pipefail
+          test -n "$INSTALLER_KEY"
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in pruebas/instalador-windows/SGT_Setup.exe.enc -out "$RUNNER_TEMP/SGT_Setup.exe" -pass env:INSTALLER_KEY
+      - name: Instalar sin interacción
+        shell: pwsh
+        run: |
+          $dest = Join-Path $env:RUNNER_TEMP 'SGT-Instalado'
+          "SGT_INSTALL_DIR=$dest" >> $env:GITHUB_ENV
+          $installer = Join-Path $env:RUNNER_TEMP 'SGT_Setup.exe'
+          $hash = (Get-FileHash $installer -Algorithm SHA256).Hash.ToLower()
+          if ($hash -ne '22a25f536864cef03956aeb01639d4f33536aa0ef2c39c5c74afcd1918f3244e') { throw 'El instalador no coincide con el adjunto original' }
+          $p = Start-Process $installer -ArgumentList @('/VERYSILENT','/SUPPRESSMSGBOXES','/NORESTART','/SP-',"/DIR=`"$dest`"") -Wait -PassThru
+          if ($p.ExitCode -ne 0) { throw "Instalación fallida: $($p.ExitCode)" }
+      - name: Probar aplicación instalada y recursos
+        env:
+          SGT_TEST_CREDENTIALS: ${{ secrets.SGT_TEST_CREDENTIALS }}
+        run: python pruebas/instalador-windows/probar.py
+      - name: Guardar evidencias revisables
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: sgt-resultados-windows
+          path: evidencias/
+          retention-days: 3
+          if-no-files-found: warn
