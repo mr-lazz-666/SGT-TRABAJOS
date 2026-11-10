@@ -9,7 +9,7 @@ ALCANCE
 El registro empieza con los próximos cambios de diseño solicitados.
 No se imputan horas de análisis, pruebas ni réplicas anteriores.
 La apertura de esta bitácora no constituye un cambio de diseño.
-Todavía no hay FIX de diseño registrados.
+Primer registro: FIX-PORTAL-001, en preview; pendiente de aprobación.
 
 Cada FIX documentará el trabajo en la preview y los archivos reales
 preparados para reemplazo. La aprobación e integración se anotarán
@@ -81,3 +81,58 @@ OBSERVACIONES:
 ------------------------------------------------------------
 FIN DE LA PLANTILLA - AÑADIR LOS FIX REALES DEBAJO
 ------------------------------------------------------------
+
+
+============================================================
+FIX-PORTAL-001 - PROPUESTA VISUAL DEL PORTAL VECINOS
+============================================================
+FECHA: 10/11/2026
+ZONA: America/Santiago, UTC-03:00
+INICIO: 19:29:29
+PUBLICACIÓN DE PREVIEW CONFIRMADA: 19:32:37
+INTERVALO OBSERVADO HASTA PUBLICACIÓN: 3 min 8 s (0,05222 h)
+
+APARTADO: Vecinos, ruta /vecinos.
+SOLICITUD: Mostrar una propuesta de diseño conservando identidad SGT.
+
+QUÉ SE HIZO:
+- Incorporar el logo municipal original y conservar los azules SGT.
+- Diseñar encabezado, navegación activa y guía lateral de tres pasos.
+- Reorganizar visualmente los campos, manteniendo IDs y formulario.
+- Añadir foco visible, adaptación móvil y movimiento reducido.
+- Añadir placeholders, contador de caracteres y estilo de confirmación.
+- Preparar worker.js completo como candidato, con logo incorporado.
+- Publicar la preview sin aplicar el candidato al portal real.
+
+ARCHIVOS:
+portal-web/FIX-PORTAL-001/diseno/vecinos.css
+portal-web/FIX-PORTAL-001/diseno/vecinos-ui.js
+portal-web/FIX-PORTAL-001/candidato/SERVIDOR_CLOUDFLARE/worker.js
+portal-web/FIX-PORTAL-001/INSTRUCCIONES.md
+
+TIEMPO Y REPARTO:
+Intervalo observado hasta publicación: 188 segundos; incluye procesos.
+Espera de la llamada de publicación: 24,6 segundos, según herramienta.
+Análisis, HTML, CSS, JavaScript, validación y documentación:
+realizados dentro del intervalo, sin cronometraje separado por rubro.
+No se asignan minutos retrospectivamente a cada rubro.
+Tiempo activo e imputación de horas: PENDIENTES DE VALIDAR.
+El cierre administrativo en GitHub se realiza después de publicar.
+
+VALIDACIÓN:
+- Sintaxis de worker.js y JavaScript visual: correcta.
+- Generación de Vecinos, Presidentes y Seguimiento: HTTP 200.
+- Código ajeno a page(): comprobado idéntico al ZIP de referencia.
+- No se modificaron API, SQL, autenticación ni sincronización.
+- Revisión visual y validación Cloudflare de ensayo: pendientes.
+
+PREVIEW:
+https://sgt-replica-navegable.warmcactus.chatgpt.site/portales/vecinos.html?diseno=fix001
+Versión Sites: appgprj_6af37c9be8ec81919f40f5a2cbdca28e~appgver_a4f8e078f4248191a4c8d7c97cfde0b5
+
+ESTADO: EN PREVIEW.
+APROBACIÓN DEL PROPIETARIO: PENDIENTE.
+INTEGRACIÓN REAL: NO APLICADA.
+OBSERVACIÓN: La API de demostración de la preview no forma parte
+ del candidato para reemplazo. Los archivos de diseno son editables;
+ el reemplazo previsto conserva un único worker.js autocontenido.

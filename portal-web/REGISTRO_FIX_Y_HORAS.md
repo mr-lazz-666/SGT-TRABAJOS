@@ -123,4 +123,4 @@ FIX-PORTAL-XXX/
 └── REGISTRO_FIX.md
 ```
 
-Esta sección documenta el criterio indicado por el propietario. Todavía no se ha preparado un reemplazo funcional: el primer apartado y el cambio concreto serán indicados por el propietario.
+Esta sección documenta el criterio indicado por el propietario. El candidato del primer diseño está en `FIX-PORTAL-001/candidato/`, pendiente de aprobación; no es una entrega aplicada al portal real.
