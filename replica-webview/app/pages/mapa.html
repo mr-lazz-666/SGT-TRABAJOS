@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Mapa - SGT Municipal</title>
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../assets/vendor/2-leaflet.css"/>
+<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/mapa.css" rel="stylesheet">
+</head>
+<body>
+<div class="app-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo-box">SB</div><div><div class="brand-title">SGT Municipal</div><div class="brand-sub">San Bernardo</div></div></div>
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+    <div class="sidebar-user"><div class="user-name">Invitado</div><div class="user-role">Administrador</div><a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a></div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <h1>Mapa de Juntas de Vecinos</h1>
+      <div class="topbar-actions">
+        <a href="cargar-excel.html" class="btn-cargar-excel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Cargar Excel
+        </a>
+        <a href="adjuntar-carpeta.html" class="btn-cargar-excel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7h5l2 2h9v10H4z"/><path d="M12 12v5"/><path d="M9.5 14.5 12 12l2.5 2.5"/></svg>
+          Cargar carpeta de fotos
+        </a>
+        <div class="date" id="current-date"></div>
+      </div>
+    </div>
+    
+
+    <div class="map-page-body">
+            <!-- Contador de Leyendas (independiente del panel de filtros y del popup) -->
+      <div class="map-side-panel" id="contadorLeyenda" style="position:absolute; top:16px; right:16px; width:190px">
+        <div class="fw-bold small mb-2">Resumen general</div>
+        <div class="legend-count-item"><span class="legend-dot" style="background:#dc2626"></span>Críticas <strong id="cntCritica"></strong></div>
+        <div class="legend-count-item"><span class="legend-dot" style="background:#7c3aed"></span>En proceso <strong id="cntProceso"></strong></div>
+        <div class="legend-count-item"><span class="legend-dot" style="background:#d97706"></span>Pendientes <strong id="cntPendiente"></strong></div>
+        <div class="legend-count-item"><span class="legend-dot" style="background:#16a34a"></span>Resueltas <strong id="cntResuelta"></strong></div>
+      </div>
+
+      <!-- Panel de solicitudes de la Leyenda seleccionada -->
+      <div class="map-side-panel d-none" id="panelSolicitudesLeyenda" style="position:absolute; top:16px; right:216px; width:330px; max-height:80vh; overflow-y:auto">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <h6 class="fw-bold mb-0" id="panelSolTitulo">Solicitudes</h6>
+          <button class="btn-close btn-close-sm" onclick="cerrarPanelSolicitudesLeyenda()"></button>
+        </div>
+        <button class="btn btn-outline-primary btn-sm w-100 mb-2" onclick="generarReporteLeyenda()"> Generar reporte (minuta)</button>
+        <div id="panelSolListado"></div>
+      </div>
+      <div id="map"></div>
+
+<!-- Panel de Categorías -->
+<div class="map-filters collapsible"
+     style="top:16px; left:50px; width:220px;"
+     id="categoriasPanel">
+
+  <div class="map-filter-header"
+       onclick="togglePanel('categoriasPanel')">
+
+    <div class="fw-bold small">
+      Categorías
+    </div>
+
+    <span class="map-filter-arrow">▼</span>
+
+  </div>
+
+  <div class="map-filter-content">
+    <div id="catChips"></div>
+  </div>
+
+</div>
+
+
+<!-- Panel de Leyenda -->
+<div class="map-filters collapsible"
+     style="top:16px; left:280px; width:190px;"
+     id="leyendaPanel">
+
+  <div class="map-filter-header"
+       onclick="togglePanel('leyendaPanel')">
+
+    <div class="fw-bold small">
+      Leyenda
+    </div>
+
+    <span class="map-filter-arrow">▼</span>
+
+  </div>
+
+  <div class="map-filter-content">
+
+    <div class="legend-item" data-estado="critica">
+      <span class="legend-dot" style="background:#dc2626"></span>
+      Crítica
+    </div>
+
+    <div class="legend-item" data-estado="proceso">
+      <span class="legend-dot" style="background:#7c3aed"></span>
+      En proceso
+    </div>
+
+    <div class="legend-item" data-estado="pendiente">
+      <span class="legend-dot" style="background:#d97706"></span>
+      Pendiente
+    </div>
+
+    <div class="legend-item" data-estado="resuelta">
+      <span class="legend-dot" style="background:#16a34a"></span>
+      Resuelta
+    </div>
+
+  </div>
+
+</div>
+
+      <!-- Tarjeta flotante anclada sobre el pin -->
+      <div class="map-popup-card d-none" id="popupCard">
+        <button class="map-popup-close" onclick="cerrarPopup()">&times;</button>
+        <h6 class="fw-bold mb-0" id="popupNombre"></h6>
+        <div class="text-muted" style="font-size:12.5px" id="popupDireccion"></div>
+        <div class="small mt-1"><strong>Presidente:</strong> <span id="popupPresidente"></span></div>
+        <div class="small"><strong>Territorial:</strong> <span id="popupTerritorial"></span></div>
+
+        <div class="d-flex popup-stats" id="popupStats">
+          <div><div class="fw-bold" id="popupTotal"></div><div style="font-size:11px" class="text-muted">Total</div></div>
+          <div><div class="fw-bold text-primary" id="popupProceso"></div><div style="font-size:11px" class="text-muted">En proceso</div></div>
+          <div><div class="fw-bold text-danger" id="popupCriticas"></div><div style="font-size:11px" class="text-muted">Críticas</div></div>
+          <div><div class="fw-bold text-success" id="popupResueltas"></div><div style="font-size:11px" class="text-muted">Resueltas</div></div>
+        </div>
+
+        <div style="font-size:12.5px" class="mb-1 fw-semibold">Nivel de confianza</div>
+        <div class="confianza-bar mb-1"><div class="confianza-fill" id="popupConfianza"></div></div>
+        <div class="small text-end fw-semibold mb-3" id="popupConfianzaTexto"></div>
+
+        <div class="d-flex gap-2">
+          <button class="btn btn-outline-secondary btn-sm flex-fill" data-bs-toggle="offcanvas" data-bs-target="#detalleOffcanvas">Ver solicitudes</button>
+          <a class="btn btn-primary btn-sm flex-fill" id="popupVerJunta">Ver Junta</a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Offcanvas lateral: solicitudes de la Junta seleccionada -->
+    <div class="offcanvas offcanvas-end" tabindex="-1" id="detalleOffcanvas" style="width:400px">
+      <div class="offcanvas-header border-bottom">
+        <h5 class="offcanvas-title" id="offNombre">Junta de Vecinos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas"></button>
+      </div>
+      <div class="offcanvas-body">
+        <div class="mb-3"><input type="text" id="offBuscador" class="form-control-sm2" placeholder="Buscar solicitud..."></div>
+        <div id="offListado"></div>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="../assets/vendor/4-bootstrap.bundle.min.js"></script>
+<script src="../assets/vendor/3-leaflet.js"></script>
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/mapa.js"></script>
+<script src="../assets/vendor/6-html2canvas.min.js"></script>
+<script src="../assets/vendor/7-jspdf.umd.min.js"></script>
+</body>
+</html>

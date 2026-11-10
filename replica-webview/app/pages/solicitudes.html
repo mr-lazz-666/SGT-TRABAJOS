@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Solicitudes - SGT Municipal</title>
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/solicitudes.css" rel="stylesheet">
+<style>
+  .btn-accion-top{
+    display:inline-flex; align-items:center; gap:6px;
+    padding:7px 14px; border-radius:999px; font-size:12.5px; font-weight:600;
+    text-decoration:none; border:1px solid transparent; transition:.15s;
+  }
+  .btn-accion-top.solid{ background:var(--accent); color:#fff; }
+  .btn-accion-top.solid:hover{ background:var(--accent-dark); color:#fff; }
+  .btn-accion-top.outline{ background:#fff; border-color:var(--border-color); color:var(--text-dark); }
+  .btn-accion-top.outline:hover{ border-color:var(--accent); color:var(--accent); background:#f8faff; }
+  .btn-accion-top svg{ width:14px; height:14px; }
+</style>
+</head>
+<body>
+<div class="app-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo-box">SB</div><div><div class="brand-title">SGT Municipal</div><div class="brand-sub">San Bernardo</div></div></div>
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+    <div class="sidebar-user"><div class="user-name">Invitado</div><div class="user-role">Administrador</div><a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a></div>
+  </aside>
+  <main class="main-content">
+    <div class="topbar">
+      <h1>Solicitudes</h1>
+      <div class="d-flex gap-2">
+        <a href="cargar-excel.html" class="btn-accion-top outline" data-admin-only title="Generar plantilla actualizada desde SGT">Solicitar Excel</a>
+        <a href="cargar-excel.html" class="btn-accion-top outline">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Cargar Excel
+        </a>
+        <a href="solicitud-form.html" class="btn-accion-top solid">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 5v14M5 12h14"/></svg>
+          Nueva Solicitud
+        </a>
+      </div>
+    </div>
+    <div class="page-body">
+      <div class="card-flat mb-3">
+        <input id="buscador" class="form-control-sm2 mb-2" placeholder="Buscar folio, requerimiento...">
+        <div class="d-flex flex-wrap gap-2">
+          <select id="fEstado" class="form-select form-select-sm w-auto"><option value="">Todos los estados</option><option value="pendiente">Pendiente</option><option value="proceso">En proceso</option><option value="critica">Crítica</option><option value="resuelta">Resuelta</option></select>
+          <select id="fCategoria" class="form-select form-select-sm w-auto"><option value="">Todas las categorías</option></select>
+          <select id="fDepto" class="form-select form-select-sm w-auto"><option value="">Todos los departamentos</option></select>
+        </div>
+      </div>
+      <div class="card-flat"><table class="table-custom"><thead><tr><th>Folio</th><th>Junta</th><th>Categoría</th><th>Depto.</th><th>Prioridad</th><th>Estado</th><th>Confianza</th><th></th></tr></thead><tbody id="tbody"></tbody></table></div>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/solicitudes.js"></script>
+<script>
+
+</script>
+</body>
+</html>

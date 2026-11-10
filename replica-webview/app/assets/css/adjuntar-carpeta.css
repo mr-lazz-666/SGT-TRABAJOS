@@ -1,0 +1,7 @@
+/* =========================================================
+   ADJUNTAR-CARPETA.HTML
+   ========================================================= */
+  .foto-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:10px; margin-top:12px; }
+  .foto-thumb{ position:relative; border:1px solid var(--border-color); border-radius:8px; overflow:hidden; aspect-ratio:1; background:#f3f4f6; }
+  .foto-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .foto-thumb .foto-nombre{ position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.6); color:#fff; font-size:9.5px; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }

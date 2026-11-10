@@ -1,0 +1,427 @@
+/* =========================================================
+   MAPA.HTML
+   ========================================================= */
+#map{ position:absolute; top:0; left:0; right:0; bottom:0; }
+.map-page-body{ position:relative; height:calc(100vh - 65px); overflow:hidden; }
+
+.map-popup-card{
+  position:absolute; z-index:1000;
+  background:#fff; border-radius:14px;
+  box-shadow:0 18px 40px rgba(0,0,0,.22), 0 0 0 1px rgba(0,0,0,.04);
+  width:320px; padding:20px 24px;
+  border-top:5px solid var(--accent);
+  transform-origin:bottom center;
+  animation:popupStretch .25s cubic-bezier(.2,.9,.3,1.2) forwards;
+  pointer-events:auto;
+}
+@keyframes popupStretch{
+  from{ opacity:0; transform:translate(-50%, -100%) scaleY(0.15); }
+  to  { opacity:1; transform:translate(-50%, -100%) scaleY(1); }
+}
+.map-popup-card::after{
+  content:''; position:absolute; bottom:-9px; left:50%;
+  transform:translateX(-50%);
+  width:0; height:0;
+  border-left:9px solid transparent;
+  border-right:9px solid transparent;
+  border-top:9px solid #fff;
+  filter:drop-shadow(0 3px 2px rgba(0,0,0,.06));
+}
+.map-popup-close{
+  position:absolute; top:12px; right:14px;
+  background:none; border:none; font-size:18px; line-height:1;
+  color:#9ca3af; cursor:pointer; padding:2px;
+}
+.map-popup-close:hover{ color:#374151; }
+.map-popup-card h6{ font-size:16.5px; }
+.map-popup-card .popup-stats{
+  gap:18px !important;
+  padding:14px 0;
+  border-top:1px solid #f1f2f4;
+  border-bottom:1px solid #f1f2f4;
+  margin:14px 0 !important;
+}
+.map-popup-card .popup-stats .fw-bold{ font-size:20px; }
+
+.map-legend{
+  position:absolute; bottom:20px; right:20px; z-index:998;
+  background:#fff; border-radius:8px;
+  box-shadow:0 4px 12px rgba(0,0,0,.12);
+  padding:12px 14px; font-size:12px;
+}
+.legend-dot{
+  width:9px; height:9px; border-radius:50%;
+  display:inline-block; margin-right:6px;
+}
+.legend-item{ cursor:pointer; padding:3px 6px; border-radius:6px; }
+.legend-item.active{ background:#f3f4f6; font-weight:700; }
+
+.pin-icon{
+  width:32px; height:32px; border-radius:50% 50% 50% 0; transform:rotate(-45deg);
+  background: linear-gradient(135deg, #fde68a 0%, #f59e0b 50%, #d97706 100%);
+  border:3px solid #fff;
+  box-shadow:
+    0 0 0 4px rgba(245,158,11,.25),
+    0 4px 12px rgba(217,119,6,.55),
+    0 2px 6px rgba(0,0,0,.3);
+  position: relative;
+}
+
+.pin-icon::after{
+  content:'';
+  position:absolute;
+  top:50%; left:50%;
+  width:10px; height:10px;
+  background:#fff;
+  border-radius:50%;
+  transform: translate(-50%,-50%) rotate(45deg);
+  box-shadow: 0 0 4px rgba(255,255,255,.9);
+}
+
+.pin-icon{
+  animation: pinGlow 1.8s ease-in-out infinite;
+}
+
+@keyframes pinGlow{
+  0%, 100% {
+    box-shadow:
+      0 0 0 4px rgba(245,158,11,.25),
+      0 4px 12px rgba(217,119,6,.55),
+      0 2px 6px rgba(0,0,0,.3);
+  }
+  50% {
+    box-shadow:
+      0 0 0 9px rgba(245,158,11,.18),
+      0 4px 16px rgba(217,119,6,.7),
+      0 2px 6px rgba(0,0,0,.3);
+  }
+}
+
+.pin-problema{
+  width:26px; height:26px; border-radius:50%;
+  background:#111827;
+  border:3px solid #fff;
+  box-shadow:0 0 0 3px #dc2626, 0 2px 6px rgba(0,0,0,.35);
+}
+
+.junta-label{
+  font-size:11px; font-weight:700; background:#fff;
+  padding:2px 6px; border-radius:6px;
+  box-shadow:0 1px 4px rgba(0,0,0,.25); border:none !important;
+}
+
+.confianza-bar{
+  width:100px; height:6px; background:#e5e7eb;
+  border-radius:4px; overflow:hidden;
+  display:inline-block; vertical-align:middle;
+}
+.confianza-fill{ height:100%; background:#16a34a; }
+
+/* Filtros del mapa */
+.map-filters{
+  position:absolute; top:16px; left:50px; z-index:998;
+  background:#fff; border-radius:10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);
+  padding:12px 14px; width:230px; max-height:80vh; overflow-y:auto;
+}
+.map-filters .cat-chip{
+  display:block; font-size:11px; padding:5px 8px; border-radius:6px;
+  margin-bottom:4px; cursor:pointer; background:#f3f4f6;
+}
+.map-filters .cat-chip.active{ background:#dbeafe; color:#1d4ed8; font-weight:600; }
+
+.map-filters.collapsible{ padding:0; overflow:hidden; }
+.map-filter-header{
+  display:flex; align-items:center; justify-content:space-between;
+  cursor:pointer; padding:10px 12px; user-select:none;
+}
+.map-filter-header:hover{ background:#f8f9fa; }
+.map-filter-arrow{
+  transition: transform 0.2s ease;
+  display:inline-block;
+  font-size:12px;
+}
+.map-filters.open .map-filter-arrow{ transform:rotate(180deg); }
+.map-filter-content{
+  max-height:0;
+  opacity:0;
+  overflow:hidden;
+  transition: max-height 0.25s ease, opacity 0.2s ease;
+  padding:0 12px;
+}
+.map-filters.open .map-filter-content{
+  max-height:400px;
+  opacity:1;
+  padding:0 12px 12px 12px;
+}
+
+.territorial-btn{
+  padding:6px 12px; border-radius:8px;
+  border:1px solid var(--border-color); font-size:12.5px;
+  cursor:pointer; background:#fff;
+}
+.territorial-btn.selected{ background:var(--accent); color:#fff; border-color:var(--accent); }
+
+.dept-chip{
+  display:inline-block; padding:4px 10px; border-radius:999px;
+  background:#f3f4f6; font-size:12px; margin:2px; cursor:pointer;
+}
+.dept-chip.selected{ background:var(--accent); color:#fff; }
+
+/* Panel lateral del mapa + solicitudes */
+.map-side-panel{
+  background:#fff; border-radius:10px;
+  box-shadow:0 4px 14px rgba(0,0,0,.12);
+  padding:12px 14px; z-index:998;
+}
+.legend-count-item{ display:flex; align-items:center; gap:6px; font-size:12.5px; padding:4px 0; }
+.legend-count-item strong{ margin-left:auto; }
+
+.sol-mini-card{
+  background:#fff;
+  border:1px solid #eef0f2;
+  border-radius:12px;
+  padding:12px 14px;
+  margin-bottom:10px;
+  transition: box-shadow 0.15s ease, transform 0.15s ease;
+  font-size:12px;
+}
+.sol-mini-card:hover{
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+  transform: translateY(-1px);
+}
+.sol-mini-card strong{ font-size:13.5px; color:#111827; }
+.sol-mini-card a.small{ color:#2563eb; text-decoration:none; font-weight:500; }
+.sol-mini-card a.small:hover{ text-decoration:underline; }
+.sol-mini-card .text-muted{ font-size:12px; margin-top:2px; }
+
+.foto-mini-row{ display:flex; gap:8px; margin-top:8px; }
+.foto-mini{
+  width:64px;
+  height:64px;
+  object-fit:cover;
+  border-radius:9px;
+  border:1px solid #e5e7eb;
+  box-shadow:0 1px 3px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor:pointer;
+}
+.foto-mini:hover{
+  transform:scale(1.04);
+  box-shadow:0 4px 10px rgba(0,0,0,0.14);
+}
+
+.off-foto-mini{
+  width: 72px;
+  height: 72px;
+  object-fit: cover;
+  border-radius: 10px;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+  cursor: pointer;
+}
+.off-foto-mini:hover{
+  transform: scale(1.04);
+  box-shadow: 0 4px 10px rgba(0,0,0,0.14);
+}
+
+/* Animación de paneles */
+.map-side-panel, .map-filters{
+  transition: opacity 0.22s ease, transform 0.22s ease;
+}
+.panel-enter{
+  opacity:0;
+  transform: translateY(-10px);
+  pointer-events:none;
+}
+.panel-enter-active{
+  opacity:1;
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   TOPBAR - MAPA DE JUNTAS
+   ============================================================ */
+
+.topbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  gap: 30px;
+  padding: 20px 24px;
+  margin-bottom: 16px;
+
+  background: #ffffff;
+  border: 1px solid #e7eaee;
+  border-radius: 12px;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+
+/* ============================================================
+   TÍTULO
+   ============================================================ */
+
+.topbar-title {
+  min-width: 0;
+}
+
+.topbar-title h1 {
+  margin: 0;
+
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.3;
+
+  color: #1f2937;
+  letter-spacing: -0.3px;
+}
+
+.topbar-title p {
+  margin: 4px 0 0;
+
+  font-size: 13px;
+  line-height: 1.4;
+
+  color: #7b8491;
+}
+
+
+/* ============================================================
+   ACCIONES
+   ============================================================ */
+
+.topbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+}
+
+
+/* ============================================================
+   FECHA
+   ============================================================ */
+
+.date-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+
+  white-space: nowrap;
+}
+
+.date-label {
+  font-size: 10px;
+  font-weight: 600;
+
+  color: #9aa1ab;
+
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.date {
+  margin-top: 3px;
+
+  font-size: 13px;
+  font-weight: 500;
+
+  color: #4b5563;
+}
+
+
+/* ============================================================
+   BOTÓN CARGAR EXCEL
+   ============================================================ */
+
+.btn-cargar-excel {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 38px;
+  padding: 0 15px;
+
+  background: #f7f8fa;
+  color: #374151;
+
+  border: 1px solid #e1e5e9;
+  border-radius: 8px;
+
+  font-size: 13px;
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-cargar-excel svg {
+  width: 16px;
+  height: 16px;
+}
+
+.btn-cargar-excel:hover {
+  background: #eef1f4;
+  border-color: #d5d9de;
+  color: #1f2937;
+
+  transform: translateY(-1px);
+}
+
+.btn-cargar-excel:active {
+  transform: translateY(0);
+}
+
+
+/* ============================================================
+   RESPONSIVE
+   ============================================================ */
+
+@media (max-width: 768px) {
+
+  .topbar {
+    flex-direction: column;
+    align-items: flex-start;
+
+    padding: 18px;
+  }
+
+  .topbar-actions {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .date-container {
+    align-items: flex-start;
+  }
+}
+
+
+@media (max-width: 500px) {
+
+  .topbar-actions {
+    flex-direction: column;
+    align-items: stretch;
+
+    width: 100%;
+  }
+
+  .date-container {
+    align-items: flex-start;
+  }
+
+  .btn-cargar-excel {
+    width: 100%;
+  }
+}

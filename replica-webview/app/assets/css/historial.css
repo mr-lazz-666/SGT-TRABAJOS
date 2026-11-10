@@ -1,0 +1,50 @@
+/* Historial de solicitudes resueltas: conserva el carácter de archivo,
+   pero usa verde para comunicar claramente que la gestión fue completada. */
+.fila-resuelta{
+  background:#f0fdf4!important;
+  color:#334155;
+  transition:background-color .18s ease, box-shadow .18s ease;
+}
+.fila-resuelta td{
+  background:#f0fdf4!important;
+  color:#475569;
+  border-color:#d1fae5!important;
+}
+.fila-resuelta td:first-child{
+  border-left:4px solid #22c55e!important;
+  padding-left:12px;
+}
+.fila-resuelta strong{
+  color:#2563eb;
+  font-weight:800;
+}
+.fila-resuelta a{
+  color:#047857;
+  font-weight:700;
+  text-decoration:none;
+}
+.fila-resuelta a:hover{
+  color:#065f46;
+  text-decoration:underline;
+}
+.fila-resuelta:hover,
+.fila-resuelta:hover td{
+  background:#dcfce7!important;
+}
+.estado-historico,.badge-historial{
+  display:inline-flex;
+  align-items:center;
+  background:#dcfce7;
+  color:#15803d;
+  border:1px solid #86efac;
+  border-radius:999px;
+  padding:5px 10px;
+  font-weight:800;
+  font-size:12px;
+}
+.estado-historico::before{
+  content:'✓';
+  margin-right:5px;
+  font-weight:900;
+}
+.badge-historial{white-space:nowrap}

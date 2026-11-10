@@ -1,0 +1,39 @@
+/* FIX9Z — Login municipal profesional. Estilos acotados a .login-modern */
+.login-modern{font-family:Inter,"Segoe UI",Arial,sans-serif;min-height:100vh;background:#f5f7fb;overflow:hidden}
+.login-modern .login-side{width:48%;min-height:100vh;display:flex;justify-content:center;padding:64px clamp(36px,5vw,94px);background:linear-gradient(135deg,#0b1d35 0%,#102e4e 62%,#143e56 100%);isolation:isolate}
+.login-modern .login-side:before{content:"";position:absolute;inset:0;top:auto;right:-30%;bottom:-47%;width:92%;height:85%;border:1px solid rgba(136,190,213,.13);border-radius:50%;background:transparent;z-index:-1}
+.login-modern .login-side:after{content:"";position:absolute;left:auto;right:-25%;top:-43%;bottom:auto;width:82%;height:75%;border:1px solid rgba(136,190,213,.1);border-radius:50%;background:transparent;z-index:-1}
+.login-modern .side-brand{position:absolute;top:clamp(30px,5vh,62px);left:clamp(36px,5vw,94px);display:flex;align-items:center;gap:19px;z-index:2}
+.login-modern .crest-frame{width:82px;height:93px;display:flex;align-items:center;justify-content:center;border-radius:16px;background:#fffdf9;border:1px solid rgba(234,229,211,.9);box-shadow:0 12px 28px rgba(0,0,0,.18);overflow:hidden;padding:5px}
+.login-modern .side-brand .shield-icon{width:100%;height:100%;object-fit:contain;filter:none}
+.login-modern .brand-wordmark{min-width:0}
+.login-modern .brand-kicker{font-size:10px;letter-spacing:1.8px;font-weight:700;color:#adc7d7;margin-bottom:4px}
+.login-modern .side-brand .brand-name{font-size:25px;letter-spacing:-.65px;line-height:1.12;color:#fff;font-weight:750}
+.login-modern .side-brand .brand-loc{font-size:12px;color:#b9d0dd;margin-top:6px}
+.login-modern .side-content{max-width:540px;z-index:2;margin-top:85px}
+.login-modern .side-eyebrow{display:flex;align-items:center;gap:10px;font-size:11px;font-weight:750;letter-spacing:2px;color:#c3d9e7;margin-bottom:23px}
+.login-modern .side-eyebrow-dot{width:9px;height:9px;border-radius:50%;background:#3dbfa9;box-shadow:0 0 0 5px rgba(61,191,169,.13)}
+.login-modern .side-content h1{font-size:clamp(32px,3.2vw,52px);line-height:1.13;letter-spacing:-1.6px;font-weight:750;margin:0 0 23px;color:#fff}
+.login-modern .side-content h1 span{color:#8cd7d2}
+.login-modern .side-content p{font-size:15px;line-height:1.85;color:#c0d2e0;max-width:460px;margin-bottom:32px}
+.login-modern .side-feature{display:flex;align-items:center;gap:12px;font-size:13px;color:#d5e4ed;margin:15px 0}
+.login-modern .feature-mark{width:23px;height:23px;display:grid;place-items:center;border-radius:8px;background:rgba(61,191,169,.14);color:#91e4cf;font-size:14px;font-weight:800}
+.login-modern .side-bottom{position:absolute;left:clamp(36px,5vw,94px);bottom:36px;font-size:10px;letter-spacing:2px;color:#7da5b8;font-weight:700}
+.login-modern .side-bottom span{color:#4fc4b7;padding:0 7px}
+.login-modern .login-form-side{background:radial-gradient(circle at 100% 0%,#f0f5f8 0%,#fff 46%);padding:65px 32px}
+.login-modern .login-form-box{width:100%;max-width:410px}
+.login-modern .login-overline{font-size:11px;letter-spacing:1.9px;color:#127b8a;font-weight:800;margin-bottom:14px}
+.login-modern .login-form-box h2{font-size:31px;line-height:1.15;letter-spacing:-.85px;color:#13263b;font-weight:750;margin-bottom:13px}
+.login-modern .login-form-box .lead-text{font-size:14px;line-height:1.65;color:#6b7c8d;margin-bottom:33px}
+.login-modern .form-label-sm{font-size:12px;font-weight:750;color:#304257;margin-bottom:9px;display:block}
+.login-modern .form-control-sm2{width:100%;height:49px;border:1px solid #d9e1e9;background:#fff;border-radius:11px;padding:0 15px;font-size:13px;color:#152d43;transition:border-color .15s,box-shadow .15s}
+.login-modern .form-control-sm2:focus{outline:0;border-color:#278ca0;box-shadow:0 0 0 4px rgba(39,140,160,.12)}
+.login-modern .login-submit{height:50px;border-radius:11px;border:0;background:linear-gradient(95deg,#086f84,#128a9a);font-size:14px;box-shadow:0 9px 20px rgba(12,121,142,.16);display:flex;align-items:center;justify-content:center;gap:14px}
+.login-modern .login-submit:hover{background:linear-gradient(95deg,#065f74,#08798b)}
+.login-modern .login-submit span{font-size:21px;line-height:1}
+.login-modern .login-help{display:flex;align-items:center;justify-content:center;gap:8px;font-size:11px;color:#8a99a9;margin-top:30px}
+.login-modern .secure-dot{height:7px;width:7px;border-radius:50%;background:#3aab8b}
+.login-modern .login-footer-copy{position:absolute;left:48%;right:0;bottom:26px;font-size:10px;color:#a1adba;text-align:center;pointer-events:none}
+@media(max-width:1050px){.login-modern .login-side{width:43%;padding:40px}.login-modern .side-brand{left:40px}.login-modern .side-bottom{left:40px}.login-modern .side-content h1{font-size:33px}.login-modern .login-footer-copy{left:43%}}
+@media(max-width:860px){.login-modern .login-side{display:none}.login-modern .login-form-side{min-height:100vh}.login-modern .login-footer-copy{left:0}}
+@media(max-height:720px){.login-modern .side-brand{top:22px}.login-modern .crest-frame{width:58px;height:68px}.login-modern .side-content{margin-top:75px}.login-modern .side-content h1{font-size:33px}.login-modern .side-content p{margin-bottom:18px}.login-modern .side-feature{margin:9px 0}}

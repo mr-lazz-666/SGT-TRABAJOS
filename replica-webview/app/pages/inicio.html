@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Inicio - SGT Municipal</title>
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="../assets/vendor/2-leaflet.css"/>
+<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/inicio.css" rel="stylesheet">
+<style>
+
+</style>
+</head>
+<body>
+<div class="app-wrapper">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">SB</div>
+      <div><div class="brand-title">SGT Municipal</div><div class="brand-sub">San Bernardo</div></div>
+    </div>
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+    <div class="sidebar-user">
+      <div class="user-name">Invitado</div>
+      <div class="user-role">Administrador</div>
+      <a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div>
+        <h1>Gestión Territorial</h1>
+        <div class="subtitle">Resumen de solicitudes y problemáticas de las Juntas de Vecinos</div>
+        <a href="cargar-excel.html" class="btn-cargar-excel">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="M7 10l5 5 5-5"/><path d="M5 21h14"/></svg>
+          Cargar Excel
+        </a>
+      </div>
+      <div class="date" id="current-date"></div>
+    </div>
+
+    <div class="page-body">
+      <div class="row g-3 mb-4" id="stats"></div>
+
+      <!-- Vista previa del mapa -->
+      <div class="card-flat mb-4 p-0 mapa-preview-card">
+        <div class="d-flex justify-content-between align-items-center mapa-preview-header">
+          <h6 class="fw-bold mb-2">🗺️ Ve los reportes en el mapa aquí</h6>
+          <a href="mapa.html" class="small fw-semibold text-decoration-none mb-2">Ver mapa completo →</a>
+        </div>
+        <span class="mapa-preview-tag">Vista previa</span>
+        <div id="miniMap"></div>
+        <div class="mapa-preview-overlay">
+        </div>
+      </div>
+
+      <div class="card-flat mb-4">
+        <h6 class="fw-bold mb-3">Solicitudes prioritarias</h6>
+        <table class="table-custom">
+          <thead><tr><th>Folio</th><th>Junta de Vecinos</th><th>Categoría</th><th>Prioridad</th><th>Estado</th><th>Fecha</th></tr></thead>
+          <tbody id="tbodyPrioritarias"></tbody>
+        </table>
+      </div>
+
+      <div class="card-flat">
+        <h6 class="fw-bold mb-3">Actividad reciente</h6>
+        <div class="timeline" id="timelineReciente"></div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../assets/vendor/3-leaflet.js"></script>
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/inicio.js"></script>
+</body>
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+  <meta charset="UTF-8">
+  <title>Cargar Excel - SGT Municipal</title>
+
+  <link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+  <link href="../assets/css/style.css" rel="stylesheet">
+  <link href="../assets/css/cargar-excel.css" rel="stylesheet">
+  <link rel="stylesheet" href="../assets/vendor/2-leaflet.css">
+
+</head>
+
+<body>
+<div class="app-wrapper">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">SB</div>
+      <div>
+        <div class="brand-title">SGT Municipal</div>
+        <div class="brand-sub">San Bernardo</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-name">Invitado</div>
+      <div class="user-role">Administrador</div>
+      <a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a>
+    </div>
+  </aside>
+
+  <main class="main-content">
+
+    <div class="topbar">
+      <div>
+        <div class="small text-muted mb-1">
+          <a href="solicitudes.html" class="text-muted text-decoration-none">Solicitudes</a>
+          &gt; Cargar Excel
+        </div>
+        <h1>Cargar Excel</h1>
+      </div>
+    </div>
+
+    <div class="page-body">
+      <div class="card-flat mb-3" data-admin-only>
+        <h2 class="h5 mb-2">Solicitar Excel para solicitudes y juntas</h2>
+        <p class="text-muted small">SGT crea una plantilla virgen con las juntas actualmente registradas. No incluye solicitudes antiguas. Solo administración puede solicitarla.</p>
+        <button class="btn btn-primary" id="btnPlantillaSGT" onclick="solicitarExcelSGT()">Solicitar Excel para solicitudes y juntas</button>
+      </div>
+      <div class="card-flat">
+        <h2 class="h5 mb-2">Importar Excel SGT, Forms o Madre</h2>
+        <p class="text-muted small">Se admiten tres formatos: (1) Excel generado por SGT, (2) SGTE_FORMS.xlsx, (3) SGT_MADRE.xlsx o plantilla_sgt_v5_MADRE.xlsx para importar datos históricos. Los requerimientos pueden tener desde una palabra. Revisa la previsualización antes de importar.</p>
+        <label class="dropzone d-block" for="excelInput">Seleccionar Excel autorizado (.xlsx)<br><small>Excel SGT, SGTE_FORMS.xlsx o SGT_MADRE.xlsx</small></label>
+        <input type="file" id="excelInput" accept=".xlsx" hidden onchange="procesarExcelSGT(this)">
+        <p class="mt-3" id="excelResumen"></p>
+        <div id="excelPrevisualizacion" class="d-none mt-3">
+          <h3 class="h6">Previsualización de importación y georreferenciación</h3>
+          <p class="small text-muted" id="excelPreviaResumen"></p>
+          <div class="table-responsive" style="max-height:440px;overflow:auto">
+            <table class="table table-sm table-striped table-bordered align-middle">
+              <thead class="table-light position-sticky top-0"><tr>
+                <th>Fila</th><th>Tipo</th><th>Junta</th><th>Requerimiento</th>
+                <th>Ubicación junta</th><th>Ubicación problema</th><th>Mapa</th>
+              </tr></thead>
+              <tbody id="excelFilasPrevia"></tbody>
+            </table>
+          </div>
+          <div id="excelMapaPrevia" class="d-none mt-3" style="height:310px;border-radius:10px"></div>
+        </div>
+        <button class="btn btn-primary" id="btnImportarSGT" disabled onclick="importarExcelSGT()">Importar juntas y solicitudes válidas</button>
+        <div id="excelMensaje" class="d-none mt-3" role="status" style="white-space:pre-line"></div>
+      </div>
+    </div>
+
+  </main>
+</div>
+
+<!-- Bootstrap -->
+<script src="../assets/vendor/4-bootstrap.bundle.min.js"></script>
+<!-- Excel -->
+<script src="../assets/vendor/5-xlsx.full.min.js"></script>
+<!-- Leaflet -->
+<script src="../assets/vendor/3-leaflet.js"></script>
+<!-- Sistema -->
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/excel-sgt.js"></script>
+
+</body>
+</html>

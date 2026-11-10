@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Detalle de Junta - SGT Municipal</title>
+
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link href="../assets/vendor/2-leaflet.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/junta-detalle.css" rel="stylesheet">
+
+</head>
+
+<body>
+
+<div class="app-wrapper">
+
+  <aside class="sidebar">
+    <div class="sidebar-brand">
+      <div class="logo-box">SB</div>
+      <div>
+        <div class="brand-title">SGT Municipal</div>
+        <div class="brand-sub">San Bernardo</div>
+      </div>
+    </div>
+
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+
+    <div class="sidebar-user">
+      <div class="user-name">Invitado</div>
+      <div class="user-role">Administrador</div>
+      <a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a>
+    </div>
+  </aside>
+
+
+  <main class="main-content">
+
+    <div class="topbar">
+      <div class="small text-muted">
+        <a href="juntas.html" class="text-muted text-decoration-none">Juntas de Vecinos</a>
+        / <strong id="bcNombre"></strong>
+      </div>
+    </div>
+
+
+    <div class="page-body">
+
+      <!-- =====================================================
+           INFORMACIÓN DE LA JUNTA
+      ====================================================== -->
+
+      <div class="card-flat mb-3">
+        <div class="d-flex justify-content-between align-items-start">
+
+          <div>
+            <h5 class="fw-bold mb-0" id="dNombre"></h5>
+            <div class="text-muted small" id="dDireccion"></div>
+
+            <div class="small mt-1">
+              <strong>Presidente:</strong> <span id="dPresidente"></span>
+            </div>
+
+            <div class="small mt-2">
+              Territorial: <span id="dTerrLabel"></span>
+            </div>
+
+            <div class="d-flex gap-2 mt-1" id="dTerritoriales"></div>
+            <div class="small mt-2 mb-1 d-flex justify-content-between">
+              <span>Nivel de confianza</span>
+              <strong id="dConfianzaPorcentaje">0%</strong>
+            </div>
+
+            <div class="confianza-bar">
+              <div class="confianza-fill" id="dConfianza"></div>
+            </div>
+          </div>
+
+
+          <div class="d-flex gap-2">
+            <button data-admin-only type="button" class="btn btn-outline-primary btn-sm" onclick="mostrarEditor()">
+              ✏️ Editar junta
+            </button>
+            <a class="btn btn-outline-secondary btn-sm" id="btnHistorial">
+              Ver historial de esta junta
+            </a>
+          </div>
+
+        </div>
+      </div>
+
+
+      <!-- =====================================================
+           EDITAR JUNTA
+      ====================================================== -->
+
+      <div class="card-flat mb-3 editar-junta-panel" id="panelEditar">
+
+        <div class="d-flex justify-content-between align-items-center mb-3">
+          <div>
+            <h5 class="fw-bold mb-0">Editar Junta de Vecinos</h5>
+            <div class="text-muted small">Modifica los datos de la junta.</div>
+          </div>
+          <button type="button" class="btn btn-sm btn-outline-secondary" onclick="cancelarEdicion()">
+            Cancelar
+          </button>
+        </div>
+
+
+        <!-- NOMBRE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Nombre de la Junta</label>
+          <input type="text" class="form-control" id="editNombre" placeholder="Nombre de la junta">
+        </div>
+
+
+        <!-- PRESIDENTE -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Presidente a cargo</label>
+          <input type="text" class="form-control" id="editPresidente" placeholder="Nombre del presidente">
+        </div>
+
+
+        <!-- TERRITORIAL -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Territorial</label>
+          <select class="form-select" id="editTerritorial"></select>
+        </div>
+
+
+        <!-- DIRECCIÓN -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Ubicación / Dirección</label>
+          <input type="text" class="form-control" id="editDireccion" placeholder="Ej: Avenida Colón 1234">
+        </div>
+
+
+        <!-- MAPA -->
+        <div class="mb-3">
+          <label class="form-label fw-bold">Seleccionar ubicación en mapa</label>
+
+          <div class="mapa-buscador">
+            <input type="text" class="form-control" id="buscadorEditarMapa"
+                   placeholder="Buscar dirección..." onkeydown="enterBuscarEditarMapa(event)">
+            <button type="button" class="btn btn-primary" id="btnBuscarEditarMapa"
+                    onclick="buscarEditarMapa()">Buscar</button>
+          </div>
+
+          <div id="resultadoEditarMapa" class="mapa-resultado"></div>
+          <div id="mapaEditarJunta" class="mini-map-editar"></div>
+          <div id="ubicacionEditarInfo" class="ubicacion-info"></div>
+        </div>
+
+
+        <!-- BOTONES -->
+        <div class="d-flex justify-content-between align-items-center mt-4">
+
+          <button data-admin-only type="button" class="btn btn-outline-danger btn-eliminar-junta" onclick="eliminarJunta()">
+            🗑️ Eliminar junta
+          </button>
+
+          <div class="d-flex gap-2">
+            <button type="button" class="btn btn-outline-secondary" onclick="cancelarEdicion()">
+              Cancelar
+            </button>
+            <button type="button" class="btn btn-primary" onclick="guardarCambiosJunta()">
+              💾 Guardar cambios
+            </button>
+          </div>
+
+        </div>
+
+      </div>
+
+
+      <!-- =====================================================
+           SOLICITUDES
+      ====================================================== -->
+
+      <div class="card-flat">
+        <div class="d-flex justify-content-between mb-2">
+          <h6 class="fw-bold mb-0">Solicitudes</h6>
+          <a class="btn btn-primary btn-sm" id="btnNuevaSol">+ Nueva solicitud</a>
+        </div>
+
+        <table class="table-custom">
+          <thead>
+            <tr>
+              <th>Folio</th>
+              <th>Categoría</th>
+              <th>Prioridad</th>
+              <th>Estado</th>
+              <th></th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+
+    </div>
+
+  </main>
+
+</div>
+
+
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+
+<!-- LEAFLET -->
+<script src="../assets/vendor/3-leaflet.js"></script>
+
+<script src="../assets/js/junta-detalle.js"></script>
+
+</body>
+</html>

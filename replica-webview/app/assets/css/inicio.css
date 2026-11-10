@@ -1,0 +1,53 @@
+/* =========================================================
+   INICIO.HTML
+   ========================================================= */
+.mapa-preview-card{
+  position:relative; border-radius:10px; overflow:hidden;
+  border:1px solid var(--border-color);
+}
+.mapa-preview-header{ padding:16px 20px 0 20px; }
+#miniMap{ height:220px; width:100%; pointer-events:none; }
+.mapa-preview-overlay{
+  position:absolute; inset:0; top:56px;
+  background:linear-gradient(180deg, rgba(255,255,255,0) 55%, rgba(255,255,255,.92) 100%);
+  display:flex; align-items:flex-end; justify-content:center;
+  padding-bottom:18px;
+}
+.btn-ver-mapa{
+  background:var(--accent); color:#fff; border:none;
+  padding:9px 22px; border-radius:8px;
+  font-size:13.5px; font-weight:600; text-decoration:none;
+  box-shadow:0 4px 14px rgba(37,99,235,.35);
+  transition:.15s;
+}
+.btn-ver-mapa:hover{ background:var(--accent-dark); color:#fff; transform:translateY(-1px); }
+.mapa-preview-tag{
+  position:absolute; top:70px; left:20px; z-index:500;
+  background:#fff; border-radius:999px;
+  padding:4px 12px; font-size:11px; font-weight:600;
+  color:var(--text-muted);
+  box-shadow:0 2px 8px rgba(0,0,0,.1);
+}
+.btn-cargar-excel{
+  display:inline-flex; align-items:center; gap:7px;
+  margin-top:12px; padding:8px 16px;
+  background:#fff; border:1px solid var(--border-color);
+  border-radius:999px; font-size:12.5px; font-weight:600;
+  color:var(--text-dark); text-decoration:none;
+  transition:.15s;
+}
+.btn-cargar-excel:hover{
+  border-color:var(--accent); color:var(--accent);
+  background:#f8faff; transform:translateY(-1px);
+}
+.btn-cargar-excel svg{ width:15px; height:15px; flex-shrink:0; }
+
+/* Síntesis dashboard */
+.dot{ width:8px; height:8px; border-radius:50%; background:#2563eb; display:inline-block; margin-top:5px; flex-shrink:0; }
+.dot.warn{ background:#d97706; }
+.dot.danger{ background:#dc2626; }
+.dot.ok{ background:#16a34a; }
+
+#sintesisList{ list-style:none; padding:0; margin:0; }
+#sintesisList li{ display:flex; gap:8px; padding:6px 0; font-size:13px; border-bottom:1px solid #f1f2f4; }
+#sintesisList li:last-child{ border-bottom:none; }

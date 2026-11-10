@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Reporte Simplificado - SGT Municipal</title>
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
+</head>
+<body>
+<div class="app-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo-box">SB</div><div><div class="brand-title">SGT Municipal</div><div class="brand-sub">San Bernardo</div></div></div>
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+    <div class="sidebar-user"><div class="user-name">Invitado</div><div class="user-role">Administrador</div><a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a></div>
+  </aside>
+  <main class="main-content"><div style="padding:12px 24px;background:#fff;border-bottom:1px solid #dce3ea"><label style="cursor:pointer"><input type="checkbox" id="incluirResueltas"> Incluir solicitudes resueltas o cerradas en el reporte y PDF</label><small style="display:block;color:#667085">Desactivado por defecto</small></div>
+    <div class="topbar">
+      <div class="small text-muted mb-1"><a href="reportes.html" class="text-muted text-decoration-none">Reportes</a> &gt; Reporte simplificado</div>
+      <h1>Reporte Simplificado por Estado</h1>
+    </div>
+    <div class="page-body">
+      <div class="card-flat mb-3 d-flex gap-2 align-items-center no-print">
+        <span class="small fw-semibold">Mostrar solo:</span>
+        <button class="btn btn-sm btn-outline-secondary" data-est="">Todas</button>
+        <button class="btn btn-sm btn-outline-danger" data-est="critica">Críticas</button>
+        <button class="btn btn-sm btn-outline-purple" style="border-color:#7c3aed;color:#7c3aed" data-est="proceso">En proceso</button>
+        <button class="btn btn-sm btn-outline-warning" data-est="pendiente">Pendientes</button>
+        <button class="btn btn-sm btn-outline-success" data-est="resuelta">Resueltas</button>
+        <button class="btn btn-primary btn-sm ms-auto" onclick="exportarPDF()">⬇ Exportar PDF</button>
+      </div>
+
+      <div id="reporteArea" class="card-flat">
+        <h5 class="fw-bold mb-1" id="tituloReporte">Todas las solicitudes</h5>
+        <div class="text-muted small mb-3" id="fechaGeneracion"></div>
+        <table class="table-custom">
+          <thead>
+            <tr>
+              <th>Folio</th>
+              <th>Estado</th>
+              <th>Junta</th>
+              <th>Categoría</th>
+              <th>Departamento</th>
+              <th>Problema (Requerimiento)</th>
+              <th>Detalle (Gestión acordada)</th>
+              <th>Fecha</th>
+            </tr>
+          </thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/reportes-simplificado.js"></script>
+<script>
+
+</script>
+<script src="../assets/vendor/6-html2canvas.min.js"></script>
+<script src="../assets/vendor/7-jspdf.umd.min.js"></script>
+</body>
+</html>

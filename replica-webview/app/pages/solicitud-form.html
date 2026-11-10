@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Solicitud - SGT Municipal</title>
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/solicitud-form.css" rel="stylesheet">
+<link
+  rel="stylesheet"
+  href="../assets/vendor/2-leaflet.css"
+/>
+<style>
+  .conf-wrap{ display:flex; align-items:center; gap:8px; }
+  .conf-pct{ font-size:13px; font-weight:700; color:#2563eb; min-width:42px; }
+  .dept-manage-link{ font-size:11.5px; text-decoration:none; }
+  .dept-item{ display:flex; justify-content:space-between; align-items:center; border-bottom:1px solid #eee; padding:6px 0; font-size:13px; }
+</style>
+</head>
+<body>
+<div class="app-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo-box">SB</div><div><div class="brand-title">SGT Municipal</div><div class="brand-sub">San Bernardo</div></div></div>
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+    <div class="sidebar-user"><div class="user-name">Invitado</div><div class="user-role">Administrador</div><a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a></div>
+  </aside>
+  <main class="main-content">
+    <div class="topbar"><h1 id="tituloForm">Crear Solicitud</h1></div>
+    <div class="page-body" style="max-width:800px">
+      <form onsubmit="return guardar(event)">
+        <div class="card-flat mb-3">
+          <div class="row g-3">
+            <div class="col-md-6"><label class="form-label-sm">Junta de Vecinos</label>
+              <select id="fJunta" class="form-control-sm2" required></select>
+            </div>
+            <div class="col-md-6"><label class="form-label-sm">Fecha</label><input type="text" id="fFecha" class="form-control-sm2" placeholder="DD-MM-AAAA"></div>
+            <div class="col-md-12"><label class="form-label-sm">Categoría oficial</label>
+              <select id="fCategoria" class="form-control-sm2" required></select>
+            </div>
+            <div class="col-md-6"><label class="form-label-sm">Prioridad</label><select id="fPrioridad" class="form-control-sm2" required><option value="">Seleccionar...</option><option>Alta</option><option>Media</option><option>Baja</option></select></div>
+            <div class="col-md-6"><label class="form-label-sm">Estado</label><select id="fEstado" class="form-control-sm2"><option>Pendiente</option><option>En proceso</option><option>Crítica</option><option>Resuelta</option></select></div>
+            <div class="col-md-6">
+              <label class="form-label-sm">Nivel de confianza (1-10)</label>
+              <div class="conf-wrap">
+                <input type="number" min="1" max="10" id="fConfianza" class="form-control-sm2" oninput="actualizarConfianzaPct()">
+                <span class="conf-pct" id="confianzaPctTxt">—</span>
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <label class="form-label-sm">Dirección del problema (opcional)</label>
+              <input
+                type="text"
+                id="fDireccionProblema"
+                class="form-control-sm2"
+                placeholder="Dirección donde ocurre el problema"
+              >
+
+              <div class="mt-2">
+                <label class="form-label-sm">Referencias de dirección aproximada (opcional)</label>
+                <textarea id="fReferenciaDireccion" class="form-control-sm2" rows="2" placeholder="Ej.: sitio eriazo detrás de la sede social; sin número ni ubicación exacta"></textarea>
+                <small class="text-muted">Solo referencia descriptiva: no genera marcador automático. Si no conoce la dirección exacta, deje el campo anterior vacío.</small>
+              </div>
+              <div class="map-problema-wrap mt-2">
+                <div class="d-flex justify-content-between align-items-center mb-1">
+                  <label class="form-label-sm mb-0">Ubicación exacta del problema</label>
+                </div>
+
+                <div class="d-flex gap-2 mb-2">
+                  <input
+                    type="text"
+                    id="buscadorProblema"
+                    class="form-control-sm2"
+                    placeholder="Buscar dirección..."
+                  >
+                  <button
+                    type="button"
+                    class="btn btn-outline-primary btn-sm"
+                    onclick="buscarDireccionProblema()"
+                  >
+                    Buscar
+                  </button>
+                </div>
+
+                <div
+                  id="mapProblema"
+                  style="
+                    width:100%;
+                    height:320px;
+                    border-radius:10px;
+                    border:1px solid #ddd;
+                    overflow:hidden;
+                  "
+                ></div>
+
+                <div class="d-flex justify-content-between align-items-center mt-2" style="font-size:11px">
+                  <span id="coordenadasProblema" class="text-muted">Sin coordenadas</span>
+
+                  <div class="d-flex gap-2">
+                    <button
+                      type="button"
+                      class="btn btn-outline-secondary btn-sm"
+                      onclick="usarUbicacionJunta()"
+                    >
+                      Usar ubicación de la Junta
+                    </button>
+
+                    <button
+                      type="button"
+                      class="btn btn-outline-danger btn-sm"
+                      onclick="limpiarUbicacionProblema()"
+                    >
+                      Limpiar ubicación
+                    </button>
+                  </div>
+                </div>
+
+                <div
+                  id="estadoUbicacionProblema"
+                  class="ubicacion-estado text-muted mt-1"
+                >
+                  Selecciona un punto en el mapa o busca una dirección.
+                </div>
+              </div>
+
+              <div
+                class="form-text"
+                style="font-size:11px"
+              >
+                Puedes escribir una dirección o seleccionar directamente el punto en el mapa.
+              </div>
+            </div>
+
+            <div class="col-md-12">
+              <label class="form-label-sm">Carpeta de fotos</label>
+              <input type="text" id="fFotos" class="form-control-sm2" placeholder="Ej: folio-1234-fotos (varias carpetas separadas por ;)">
+            </div>
+          </div>
+        </div>
+        <div class="card-flat mb-3">
+          <label class="form-label-sm">Departamento encargado</label>
+          <div id="deptChips" class="mb-2"></div>
+          <div class="d-flex gap-2">
+            <input id="nuevoDept" class="form-control-sm2" placeholder="Agregar nuevo departamento...">
+            <button type="button" class="btn btn-outline-secondary btn-sm" onclick="agregarDept()">+</button>
+            <button type="button" class="btn btn-outline-danger btn-sm" onclick="abrirGestionDeptos()">Gestionar</button>
+          </div>
+          <input type="hidden" id="fDepartamento">
+          <label class="form-label-sm mt-3">Persona encargada</label>
+          <input id="fEncargado" class="form-control-sm2" placeholder="Nombre del funcionario responsable">
+        </div>
+        <div class="card-flat mb-3"><h6 class="fw-bold mb-2">Requerimiento</h6><textarea id="fRequerimiento" class="form-control-sm2" rows="3" required></textarea></div>
+        <div class="card-flat mb-3"><h6 class="fw-bold mb-2">Gestión acordada</h6><textarea id="fGestion" class="form-control-sm2" rows="3"></textarea></div>
+        <div class="d-flex gap-2">
+          <button class="btn btn-primary">Guardar</button>
+          <a href="solicitudes.html" class="btn btn-outline-secondary">Cancelar</a>
+          <button type="button" id="btnEliminar" class="btn btn-outline-danger ms-auto d-none" onclick="eliminar()">Eliminar</button>
+        </div>
+      </form>
+    </div>
+  </main>
+</div>
+
+<!-- Modal: eliminar departamentos -->
+<div class="modal fade" id="modalGestionDeptos" tabindex="-1" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h6 class="modal-title fw-bold">Gestionar departamentos</h6>
+        <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+      </div>
+      <div class="modal-body" id="listaDeptosModal"></div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-secondary btn-sm" data-bs-dismiss="modal">Cerrar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script src="../assets/vendor/4-bootstrap.bundle.min.js"></script>
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/vendor/3-leaflet.js"></script>
+<script src="../assets/js/solicitud-form.js"></script>
+</body>
+</html>

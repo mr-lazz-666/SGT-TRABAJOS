@@ -1,0 +1,29 @@
+/* FIX10F: mejora de legibilidad exclusiva del generador; los PDF conservan fondo blanco. */
+.generador-documentos-page { background:#eaf0f7; color:#172b4d; }
+.generador-documentos-page .main-content { background:linear-gradient(180deg,#e8eef7 0%,#f1f5fa 100%); }
+.generador-documentos-page .topbar { background:#102b4d; border-bottom:3px solid #2b80ca; color:#fff; }
+.generador-documentos-page .topbar h1 { color:#fff; }
+.generador-documentos-page .topbar .subtitle { color:#cbdcf1; }
+.generador-documentos-page .card-flat { background:#fff; border:1px solid #bfcde0; border-radius:13px; box-shadow:0 5px 20px rgba(15,38,72,.08); padding:24px; }
+.generador-documentos-page .form-section-heading { display:flex; align-items:center; gap:12px; background:#e8f1fb; border:1px solid #c5d9f1; border-left:4px solid #2266a9; border-radius:8px; padding:12px 14px; margin:0 0 18px; }
+.generador-documentos-page .section-number { display:grid; place-items:center; min-width:34px; height:34px; border-radius:8px; background:#173e70; color:white; font-weight:750; }
+.generador-documentos-page .form-section-heading strong { display:block; font-size:15px; color:#14355e; }
+.generador-documentos-page .form-section-heading small { display:block; color:#536a85; font-size:12px; }
+.generador-documentos-page .form-label { color:#15365d; font-weight:700; font-size:13.5px; margin-bottom:7px; }
+.generador-documentos-page .form-control,
+.generador-documentos-page .form-select { background-color:#f2f6fc; border:1.5px solid #aabed6; color:#172b4d; border-radius:7px; min-height:42px; }
+.generador-documentos-page textarea.form-control { min-height:88px; resize:vertical; }
+.generador-documentos-page .form-control:focus,
+.generador-documentos-page .form-select:focus { background:#fff; border-color:#216cbd; box-shadow:0 0 0 .20rem rgba(33,108,189,.16); }
+.generador-documentos-page .form-control::placeholder { color:#64768b; opacity:1; }
+.generador-documentos-page .form-text { color:#526780; font-size:12px; }
+.generador-documentos-page .form-check-label { color:#17375d; font-weight:600; }
+.generador-documentos-page .form-check-input { border-color:#8099b6; }
+.generador-documentos-page #meeting { background:#f5f8fd; border:1px solid #c8d5e6; border-radius:11px; padding:20px; margin-top:24px!important; }
+.generador-documentos-page #meeting .form-section-heading { background:#e0eafa; }
+.generador-documentos-page .btn { font-weight:650; border-radius:7px; padding:10px 14px; }
+.generador-documentos-page .btn-outline-secondary { background:#f3f6fa; border-color:#a6b7c9; color:#263e5a; }
+.generador-documentos-page .preview-card { border-top:4px solid #2266a9; }
+.generador-documentos-page .preview-card h5 { color:#14355e; font-weight:750; margin-bottom:14px; }
+.generador-documentos-page #docPreview { background:#fff; border:1px solid #c7d3e2; border-radius:8px; padding:16px; }
+@media(max-width:767px) { .generador-documentos-page .card-flat {padding:16px;} .generador-documentos-page #meeting {padding:13px;} }

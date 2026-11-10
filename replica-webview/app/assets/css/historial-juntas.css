@@ -1,0 +1,22 @@
+/* =========================================================
+   HISTORIAL.HTML
+   ========================================================= */
+.timeline{ position:relative; padding-left:4px; }
+.timeline-item{
+  position:relative; padding:10px 12px 10px 30px; margin-bottom:8px;
+  border-radius:8px; border-left:3px solid var(--h-color, #94a3b8);
+  background: var(--h-bg, #f8fafc);
+}
+.timeline-item::before{
+  content:''; position:absolute; left:-7px; top:14px; width:10px; height:10px;
+  border-radius:50%; background:var(--h-color, #94a3b8); border:2px solid #fff;
+  box-shadow:0 0 0 1px var(--h-color, #94a3b8);
+}
+.timeline-item .t-tag{
+  display:inline-block; font-size:10px; font-weight:700; letter-spacing:.02em;
+  text-transform:uppercase; color:var(--h-color, #64748b); margin-bottom:2px;
+}
+.timeline-item .t-title{ font-weight:600; font-size:13px; color:#1e293b; }
+.timeline-item .t-time{ font-size:11px; color:#64748b; margin:2px 0 4px; }
+.timeline-item .t-detalle{ font-size:12.5px; color:#334155; }
+.info-folio{ font-size:12px; color:#64748b; margin-bottom:12px; }

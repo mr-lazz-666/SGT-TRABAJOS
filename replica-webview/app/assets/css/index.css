@@ -1,0 +1,64 @@
+/* =========================================================
+   INDEX.HTML (Login)
+   ========================================================= */
+.login-wrapper{ display:flex; min-height:100vh; }
+
+.login-side{
+  width:44%;
+  background:linear-gradient(160deg,#0f2244,#152a4d 55%, #1b3562);
+  color:#fff; position:relative; overflow:hidden;
+  padding:50px 55px;
+  display:flex; flex-direction:column; justify-content:center;
+}
+.login-side::before{
+  content:''; position:absolute; top:-80px; right:-100px;
+  width:320px; height:320px; border-radius:50%;
+  background:rgba(255,255,255,.04);
+}
+.login-side::after{
+  content:''; position:absolute; bottom:-120px; left:-60px;
+  width:260px; height:260px; border-radius:50%;
+  background:rgba(255,255,255,.03);
+}
+.side-brand{
+  position:absolute; top:40px; left:55px;
+  display:flex; align-items:center; gap:14px;
+}
+.shield-icon{ width:52px; height:52px; flex-shrink:0; }
+.side-brand .brand-name{ font-size:16px; font-weight:700; line-height:1.2; }
+.side-brand .brand-loc{ font-size:12px; color:#9db3d8; }
+
+.side-content{ position:relative; z-index:1; max-width:400px; }
+.side-divider{
+  width:70px; height:3px; background:var(--accent);
+  border-radius:2px; margin-bottom:22px;
+}
+.side-content h1{ font-size:28px; font-weight:700; line-height:1.25; margin-bottom:16px; }
+.side-content p{ font-size:14px; color:#c7d3e8; line-height:1.6; }
+
+.login-form-side{
+  flex:1; display:flex; align-items:center; justify-content:center;
+  position:relative; background:#fff;
+}
+.login-form-box{ width:100%; max-width:340px; }
+.login-form-box h2{ font-size:24px; font-weight:700; margin-bottom:4px; }
+.login-form-box .lead-text{ font-size:13.5px; color:var(--text-muted); margin-bottom:26px; }
+
+.form-check-sm{ font-size:12.5px; }
+.forgot-link{ font-size:12.5px; text-decoration:none; }
+
+.login-footer-copy{
+  position:absolute; bottom:24px; left:0; right:0; text-align:center;
+  font-size:11px; color:#9ca3af;
+}
+.rut-error{ font-size:11.5px; color:#dc2626; margin-top:4px; display:none; }
+.rut-error.show{ display:block; }
+
+@media (max-width: 860px){
+  .login-side{ display:none; }
+  .login-form-side{ width:100%; }
+}
+/* FIX9Y: escudo municipal proporcionado por el usuario en el login */
+.side-brand .shield-icon{width:76px;height:76px;object-fit:contain;flex-shrink:0;filter:drop-shadow(0 2px 5px rgba(0,0,0,.18))}
+.side-brand{gap:15px}
+@media(max-width:1050px) and (min-width:861px){.side-brand .shield-icon{width:62px;height:62px}}

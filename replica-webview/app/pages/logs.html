@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Registro de eventos - SGT Municipal</title>
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/logger.js"></script>
+</head>
+<body>
+<div class="app-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo-box">SB</div><div><div class="brand-title">SGT Municipal</div><div class="brand-sub">San Bernardo</div></div></div>
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+      <a href="logs.html" class="nav-item active"><span class="nav-dot"></span>Registro de eventos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+    <div class="sidebar-user"><div class="user-name">Invitado</div><div class="user-role">Administrador</div><a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a></div>
+  </aside>
+  <main class="main-content">
+    <div class="topbar"><h1>Registro de eventos y errores</h1></div>
+    <div class="page-body">
+      <div class="card-flat mb-3 d-flex gap-2 align-items-center flex-wrap">
+        <select id="fNivel" class="form-select form-select-sm w-auto">
+          <option value="">Todos los niveles</option>
+          <option>ERROR</option><option>WARN</option><option>INFO</option><option>DEBUG</option>
+        </select>
+        <select id="fCat" class="form-select form-select-sm w-auto">
+          <option value="">Todas las categorías</option>
+          <option>DATOS</option><option>ASIGNACION</option><option>IMPORTACION</option><option>UI</option><option>SISTEMA</option>
+        </select>
+        <button class="btn btn-sm btn-success" id="btnDiag">Ejecutar diagnóstico</button>
+        <button class="btn btn-sm btn-primary" id="btnAuditar">Ejecutar auditoría</button>
+        <button class="btn btn-sm btn-outline-secondary ms-auto" id="btnLog">⬇ .log</button>
+        <button class="btn btn-sm btn-outline-secondary" id="btnJson">⬇ .json</button>
+        <button class="btn btn-sm btn-outline-danger" id="btnLimpiar">Limpiar</button>
+      </div>
+
+      <div class="card-flat mb-3" id="panelDiag" style="display:none">
+        <h5 class="fw-bold mb-1">Resultado del diagnóstico</h5>
+        <div class="small text-muted mb-2" id="resumenDiag"></div>
+        <table class="table-custom">
+          <thead><tr><th>Batería</th><th>Prueba</th><th>Resultado</th><th>Detalle</th></tr></thead>
+          <tbody id="resDiag"></tbody>
+        </table>
+      </div>
+
+      <div class="card-flat">
+        <div class="small text-muted mb-2" id="resumen"></div>
+        <table class="table-custom">
+          <thead><tr><th>Fecha</th><th>Nivel</th><th>Categoría</th><th>Mensaje</th><th>Contexto</th><th>Página</th></tr></thead>
+          <tbody id="tbody"></tbody>
+        </table>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/auditoria.js"></script>
+<script src="../assets/js/diagnostico.js"></script>
+<script>
+const COLORES = {
+  ERROR: ['#fee2e2', '#b91c1c'], WARN: ['#fef3c7', '#b45309'],
+  INFO:  ['#dbeafe', '#1d4ed8'], DEBUG: ['#f1f5f9', '#475569']
+};
+const esc = t => String(t ?? '').replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+
+function render(){
+  const nivel = document.getElementById('fNivel').value;
+  const cat = document.getElementById('fCat').value;
+  const todos = Logger.todos();
+  const logs = todos.filter(l => (!nivel || l.nivel === nivel) && (!cat || l.categoria === cat)).reverse();
+
+  document.getElementById('resumen').textContent =
+    `${logs.length} de ${todos.length} eventos · ${todos.filter(l => l.nivel === 'ERROR').length} errores · ${todos.filter(l => l.nivel === 'WARN').length} advertencias`;
+
+  document.getElementById('tbody').innerHTML = logs.map(l => {
+    const [bg, color] = COLORES[l.nivel] || COLORES.DEBUG;
+    return `<tr>
+      <td class="small text-nowrap">${new Date(l.ts).toLocaleString('es-CL')}</td>
+      <td><span style="background:${bg};color:${color};padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600">${l.nivel}</span></td>
+      <td class="small">${esc(l.categoria)}</td>
+      <td class="small">${esc(l.mensaje)}</td>
+      <td class="small"><code>${esc(JSON.stringify(l.contexto))}</code></td>
+      <td class="small">${esc(l.pagina)}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="6" class="text-center text-muted py-3">Sin eventos registrados.</td></tr>';
+}
+
+document.getElementById('fNivel').onchange = render;
+document.getElementById('fCat').onchange = render;
+document.getElementById('btnLog').onclick = () => Logger.exportarLog();
+document.getElementById('btnJson').onclick = () => Logger.exportarJson();
+document.getElementById('btnLimpiar').onclick = () => {
+  if(confirm('¿Borrar todos los registros?')){ Logger.limpiar(); render(); }
+};
+document.getElementById('btnAuditar').onclick = () => {
+  const p = Auditoria.auditar(dbLoad(), { registrar: true });
+  Logger.info('DATOS', `Auditoría manual: ${p.length} problema(s) detectado(s)`);
+  render();
+};
+document.getElementById('btnDiag').onclick = async () => {
+  const btn = document.getElementById('btnDiag');
+  btn.disabled = true; btn.textContent = 'Ejecutando...';
+  const res = await Diagnostico.correr();
+  Diagnostico.registrar(res, { dedupe: false });
+  const ok = res.filter(r => r.estado === 'OK').length;
+  Logger.info('DIAGNOSTICO', `Diagnóstico manual: ${ok} de ${res.length} pruebas correctas`);
+
+  const C = { OK: ['#dcfce7', '#15803d'], WARN: COLORES.WARN, ERROR: COLORES.ERROR };
+  const T = { OK: 'Correcto', WARN: 'Advertencia', ERROR: 'Falla' };
+  document.getElementById('panelDiag').style.display = '';
+  document.getElementById('resumenDiag').textContent =
+    `${ok} de ${res.length} pruebas correctas · ${res.filter(r => r.estado === 'ERROR').length} fallas · ${res.filter(r => r.estado === 'WARN').length} advertencias`;
+  document.getElementById('resDiag').innerHTML = res.map(r => {
+    const [bg, color] = C[r.estado];
+    return `<tr>
+      <td class="small">${esc(r.bateria)}</td>
+      <td class="small">${esc(r.prueba)}</td>
+      <td><span style="background:${bg};color:${color};padding:2px 10px;border-radius:12px;font-size:12px;font-weight:600">${T[r.estado]}</span></td>
+      <td class="small">${esc(r.detalle) || '-'}</td>
+    </tr>`;
+  }).join('');
+  btn.disabled = false; btn.textContent = 'Ejecutar diagnóstico';
+  render();
+};
+render();
+</script>
+</body>
+</html>

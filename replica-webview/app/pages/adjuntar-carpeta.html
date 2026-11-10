@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head><script src="../assets/vendor/1-jszip.min.js"></script><script src="../assets/js/replica-runtime.js"></script>
+<meta charset="UTF-8">
+<title>Adjuntar Carpeta - SGT Municipal</title>
+<link href="../assets/vendor/0-bootstrap.min.css" rel="stylesheet">
+<link href="../assets/css/style.css" rel="stylesheet">
+<link href="../assets/css/adjuntar-carpeta.css" rel="stylesheet">
+<style>
+  .foto-grid{ display:grid; grid-template-columns:repeat(auto-fill,minmax(110px,1fr)); gap:10px; margin-top:12px; }
+  .foto-thumb{ position:relative; border:1px solid var(--border-color); border-radius:8px; overflow:hidden; aspect-ratio:1; background:#f3f4f6; }
+  .foto-thumb img{ width:100%; height:100%; object-fit:cover; display:block; }
+  .foto-thumb .foto-nombre{ position:absolute; bottom:0; left:0; right:0; background:rgba(0,0,0,.6); color:#fff; font-size:9.5px; padding:3px 5px; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+</style>
+</head>
+<body>
+<div class="app-wrapper">
+  <aside class="sidebar">
+    <div class="sidebar-brand"><div class="logo-box">SB</div><div><div class="brand-title">SGT Municipal</div><div class="brand-sub">San Bernardo</div></div></div>
+    <nav class="sidebar-nav">
+      <a href="inicio.html" class="nav-item"><span class="nav-dot"></span>Inicio</a>
+      <a href="mapa.html" class="nav-item"><span class="nav-dot"></span>Mapa</a>
+      <a href="solicitudes.html" class="nav-item"><span class="nav-dot"></span>Solicitudes</a><a href="historial.html" class="nav-item"><span class="nav-dot"></span>Historial</a>
+      <a href="juntas.html" class="nav-item"><span class="nav-dot"></span>Juntas de Vecinos</a>
+      <a href="estadisticas.html" class="nav-item"><span class="nav-dot"></span>Estadísticas y análisis</a>
+      <a href="reportes.html" class="nav-item"><span class="nav-dot"></span>Reportes</a>
+      <a href="adjuntar-carpeta.html" class="nav-item"><span class="nav-dot"></span>Cargar fotos</a>
+    <a href="entrantes-web.html" class="nav-item"><span class="nav-dot"></span>Solicitudes web</a>
+    </nav>
+    <div class="sidebar-user"><div class="user-name">Invitado</div><div class="user-role">Administrador</div><a href="#" class="logout" onclick="handleLogout(event)">Cerrar sesión</a></div>
+  </aside>
+
+  <main class="main-content">
+    <div class="topbar">
+      <div class="small text-muted mb-1"><a href="solicitudes.html" class="text-muted text-decoration-none">Solicitudes</a> &gt; Adjuntar Carpeta</div>
+      <h1>Adjuntar Carpeta de Evidencias</h1>
+    </div>
+
+    <div class="page-body">
+      <div class="card-flat mb-3">
+        <h6 class="fw-bold mb-2">Carga global automática</h6>
+        <p class="small text-muted mb-1">Selecciona una carpeta completa. El sistema asignará cada foto automáticamente según su nombre.</p>
+        <code>SGT-JV-VYB-0001-1.jpg</code>
+        <div class="small text-muted mt-2">SGT-JV = prefijo · VYB = Código Junta · 0001 = número de solicitud · 1 = número de foto.</div>
+      </div>
+
+      <div class="card-flat">
+  <h6 class="fw-bold mb-3">Carpeta de imágenes</h6>
+
+  <label class="dropzone d-block" for="carpetaInput">
+    Haz clic para seleccionar una carpeta<br>
+    <small>Se detectan .jpg / .jpeg / .png / .webp</small>
+  </label>
+  <input type="file" id="carpetaInput" webkitdirectory directory multiple hidden onchange="procesarCarpeta(this)">
+
+
+
+  <div id="listaArchivos" class="d-none mt-3">
+    <ul id="archivosUl" class="small list-unstyled mb-0"></ul>
+  </div>
+
+  <div class="d-flex gap-2 mt-3">
+    <button class="btn btn-primary btn-sm" id="btnAdjuntar" disabled onclick="confirmarAdjunto()">Integrar fotos automáticamente</button>
+    <a href="solicitudes.html" class="btn btn-outline-secondary btn-sm">Cancelar</a>
+  </div>
+  <div class="small mt-2" id="mensaje"></div>
+</div>
+
+<!-- scripts (al final del body) -->
+<script src="../assets/vendor/1-jszip.min.js"></script>
+<script src="../assets/js/sgt-config.js"></script>
+<script src="../assets/js/map-services.js"></script>
+<script src="../assets/js/data.js"></script>
+<script src="../assets/js/main.js"></script>
+<script src="../assets/js/adjuntar-carpeta.js"></script>
+</body>
+</html>
