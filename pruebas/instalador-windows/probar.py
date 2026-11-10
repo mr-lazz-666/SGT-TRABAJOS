@@ -101,6 +101,8 @@ try:
     page.screenshot(path=str(out/(name+'.png')),full_page=True)
    except Exception as e:note('Pantalla '+name,'FAIL',type(e).__name__)
   browser.close()
+ from diagnostico import diagnosticar
+ diagnosticar(data,out,note,exe,proc,api,accounts)
 except Exception as e:
  note('Ejecución de pruebas','FAIL',type(e).__name__)
 finally:
