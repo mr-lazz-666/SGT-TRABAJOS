@@ -1,5 +1,6 @@
 document.addEventListener('DOMContentLoaded', () => {
-  if(location.pathname.split('/').pop() !== 'index.html'){
+  const pageName = location.pathname.split('/').pop();
+  if(pageName && pageName !== 'index.html'){
     let u = (typeof usuarioSesion==='function') ? usuarioSesion() : null;
     if(u){
       try{ const x=new XMLHttpRequest(); x.open('GET','/api/session',false); authHeader(x); x.send(null); if(x.status!==200) u=null; }catch{ u=null; }
