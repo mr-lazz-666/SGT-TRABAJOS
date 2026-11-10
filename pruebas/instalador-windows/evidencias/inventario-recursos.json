@@ -1,0 +1,357 @@
+[
+  {
+    "archivo": "index.html",
+    "bytes": 3559,
+    "sha256": "0a4db101b2e4cf651a569e176e1ff0439af1426e137553eba9f96f0c56e422d3"
+  },
+  {
+    "archivo": "pages\\adjuntar-carpeta.html",
+    "bytes": 4159,
+    "sha256": "9c63cd84b2d37d75f37b95046a14261e9dfe0c3acf066f4c3d2f597e7384621a"
+  },
+  {
+    "archivo": "pages\\cargar-excel.html",
+    "bytes": 5031,
+    "sha256": "1fcda1319297685e9215b11889f9888c01ca37e3ded7a73531af480e71cacc78"
+  },
+  {
+    "archivo": "pages\\entrantes-web.html",
+    "bytes": 1705,
+    "sha256": "6b302486ef8f8a0ba1d8b7b8d23fb134e900d353450df0b87c2e0c903ff0214d"
+  },
+  {
+    "archivo": "pages\\estadisticas.html",
+    "bytes": 8264,
+    "sha256": "7ecad6952df1deccf977f46fca4d6db9835ba8b5e8a8943b0f22ac53baa6b775"
+  },
+  {
+    "archivo": "pages\\generador-documentos.html",
+    "bytes": 5760,
+    "sha256": "116d49b5bbe1fe64e794d3b7e6e67aa3c3326d9806995cd1f4b01ca1f9f4563c"
+  },
+  {
+    "archivo": "pages\\historial-junta.html",
+    "bytes": 5468,
+    "sha256": "960a0d7811c6eb5e0143a0d25c95e718c24cd834315a115f3e2e521b7372aaf6"
+  },
+  {
+    "archivo": "pages\\historial.html",
+    "bytes": 2456,
+    "sha256": "56b94f7d41fdabfc16875014bc513dcfb575ba52f2dbba028029260ac86d9cea"
+  },
+  {
+    "archivo": "pages\\inicio.html",
+    "bytes": 3861,
+    "sha256": "ad7a7dddf63b8b832f46f438b89dfe261aa0cd2a34aa88f0790bb261262397cf"
+  },
+  {
+    "archivo": "pages\\junta-detalle.html",
+    "bytes": 7641,
+    "sha256": "0b6412d751aacbe54ec1884841f32866b4124693d05c90246919c8d124769083"
+  },
+  {
+    "archivo": "pages\\juntas.html",
+    "bytes": 4417,
+    "sha256": "ce2122fa66e60286c5a07431486c3f2c62d72dee357a14a5528285bb990ef263"
+  },
+  {
+    "archivo": "pages\\logs.html",
+    "bytes": 7475,
+    "sha256": "b2b67c46e8b87ea08201cfdc20934e2054b643c9273f18d4535e0c81473d9ebc"
+  },
+  {
+    "archivo": "pages\\mapa.html",
+    "bytes": 8585,
+    "sha256": "2d7ca6a6e18b952e3e0a542f7161bbc3c0aabb9986d3866c0bcb6be3818b61b9"
+  },
+  {
+    "archivo": "pages\\reportes-departamentos.html",
+    "bytes": 3415,
+    "sha256": "530750ca20c1eb2c872bbbd3296aa57f0b9cb79d21d6e7ca69253e0cd3bcfa08"
+  },
+  {
+    "archivo": "pages\\reportes-juntas.html",
+    "bytes": 3392,
+    "sha256": "3873b4134977b5f3b473389611bdae85791957a44ba7e0c53c5f944afcd77af0"
+  },
+  {
+    "archivo": "pages\\reportes-simplificado.html",
+    "bytes": 4109,
+    "sha256": "891b2d5f35b171d50ff8bd80de148546a264b1b8e13da45ad843e0761c786957"
+  },
+  {
+    "archivo": "pages\\reportes.html",
+    "bytes": 5052,
+    "sha256": "8028dadb48450b2fb430289a34107eb6079418db5a1be00595f927fa3b9cea46"
+  },
+  {
+    "archivo": "pages\\solicitud-detalle.html",
+    "bytes": 2285,
+    "sha256": "bbcd4be54c924ad5b8e7271c0c374777c466522419b62fd87d25b07cffde21b0"
+  },
+  {
+    "archivo": "pages\\solicitud-form.html",
+    "bytes": 9955,
+    "sha256": "bc9716e3ab1795c1664c6584cdfa06ddc3536adfdd6dc50b1ba875680485bb23"
+  },
+  {
+    "archivo": "pages\\solicitudes.html",
+    "bytes": 4511,
+    "sha256": "388ea9b8ef97da155e444822748cfdf91ee2a9222013843a08ea3ef152df5f46"
+  },
+  {
+    "archivo": "assets\\css\\adjuntar-carpeta.css",
+    "bytes": 706,
+    "sha256": "be1048fcf735e9c47538913124e359f8d524fc89612a14fe65f167d77b767f99"
+  },
+  {
+    "archivo": "assets\\css\\estadisticas.css",
+    "bytes": 2798,
+    "sha256": "155e7e969d9199c24373cc8854dee17448ac9335bdff17ed25aeb387bad2f518"
+  },
+  {
+    "archivo": "assets\\css\\generador-documentos.css",
+    "bytes": 3007,
+    "sha256": "428ea6a0e2361b896ae85e01ebab6e425ca877b4640360b8ae41c64e71c5e4fe"
+  },
+  {
+    "archivo": "assets\\css\\historial-juntas.css",
+    "bytes": 1097,
+    "sha256": "bdda644823af00bc837aad7467b39302242d46a82c41c794b6062d93223c9787"
+  },
+  {
+    "archivo": "assets\\css\\historial.css",
+    "bytes": 1129,
+    "sha256": "6cd783354e09c7323c9d21f1f04d1733dc57bff114603df0634a6876289ed76b"
+  },
+  {
+    "archivo": "assets\\css\\index.css",
+    "bytes": 2469,
+    "sha256": "82d3cdfe3360010a73d68d34a02b12faa16fd415b2b95ca8d62b51f7ce3893dc"
+  },
+  {
+    "archivo": "assets\\css\\inicio.css",
+    "bytes": 2170,
+    "sha256": "915bcace01e45bc5b145525a28e577696c42312381a610f301c69c17919882a5"
+  },
+  {
+    "archivo": "assets\\css\\junta-detalle.css",
+    "bytes": 1039,
+    "sha256": "93a899c9c917a0f17415cfb23e8f492d0f660e5715ca4c46012c9ae73a4443c8"
+  },
+  {
+    "archivo": "assets\\css\\juntas.css",
+    "bytes": 1948,
+    "sha256": "c7f9ac1a9cacb488f00eb277b303312da0f2f07994ab1d0376e6eda3719e544e"
+  },
+  {
+    "archivo": "assets\\css\\login-modern.css",
+    "bytes": 5247,
+    "sha256": "81ffc884cff63f65b0ff75f10c02b366fbf3cddea6a330ef5edc9a03fe2adeb1"
+  },
+  {
+    "archivo": "assets\\css\\mapa.css",
+    "bytes": 10337,
+    "sha256": "0f4e8efd53c9de59b951dc12043525ca6be6c9f7f04ce5f14f613c1e6f500ab7"
+  },
+  {
+    "archivo": "assets\\css\\reportes-departamentos.css",
+    "bytes": 6776,
+    "sha256": "9425552f604bd4a39b8489c1a1908a6552e2ea8826f2e295a76c1ab85ea1ccf6"
+  },
+  {
+    "archivo": "assets\\css\\reportes-juntas.css",
+    "bytes": 3786,
+    "sha256": "361f042340ab4aeb8442e36269ed66e17ad8f71ac00333bdfb98a19e887f8a0a"
+  },
+  {
+    "archivo": "assets\\css\\reportes.css",
+    "bytes": 9592,
+    "sha256": "2998cb9137bb9eb98eb3ace173fce9727756995ddb4c2b5c31daf2a654e45e91"
+  },
+  {
+    "archivo": "assets\\css\\solicitud-form.css",
+    "bytes": 2128,
+    "sha256": "d659678c34e89edce9ee8cc3200125413ed78e78030f0f4d7cc7d947f6eb9d57"
+  },
+  {
+    "archivo": "assets\\css\\solicitudes.css",
+    "bytes": 763,
+    "sha256": "f27a71351538a7d4257202e4a8bc22708cb3da10dddbeee2219b6d910a86cf44"
+  },
+  {
+    "archivo": "assets\\css\\style.css",
+    "bytes": 48535,
+    "sha256": "acedb1c814efd5b4795e7492101d846b2f2c703f441c568f9c3f796b0e483001"
+  },
+  {
+    "archivo": "assets\\js\\adjuntar-carpeta.js",
+    "bytes": 3964,
+    "sha256": "328b9e24d79fdd77a51eab614cd9e085828764380303644e6959dd5ec6e2b6f3"
+  },
+  {
+    "archivo": "assets\\js\\auditoria.js",
+    "bytes": 4024,
+    "sha256": "8d61388977ab8abb813612d36075d2ff14f4bc12dd313a61e7015b90f3b16854"
+  },
+  {
+    "archivo": "assets\\js\\cargar-excel.js",
+    "bytes": 16900,
+    "sha256": "2019578418a45f9694b6a347b7c84121fe2c60aa89979a4790fab3b86112d0ae"
+  },
+  {
+    "archivo": "assets\\js\\data.js",
+    "bytes": 6582,
+    "sha256": "1c207d5b20bc894a53097275fbfbfcf6c89f8ab5de04290856affeaec342fb9c"
+  },
+  {
+    "archivo": "assets\\js\\diagnostico.js",
+    "bytes": 7605,
+    "sha256": "42d5594c03500b234b0443cc7bf7ad1acb8f712933c998867f0a5a5d8237bf2c"
+  },
+  {
+    "archivo": "assets\\js\\entrantes-web.js",
+    "bytes": 2497,
+    "sha256": "5350104d3dce97ea62e2a4fb8aa87db4d6b685febcf064c0c8c9b8ec7f7087fb"
+  },
+  {
+    "archivo": "assets\\js\\estadisticas.js",
+    "bytes": 21588,
+    "sha256": "8483e166e567209a8b713c05e475f9407d613dc28a82097c5b6a0339d6cf4153"
+  },
+  {
+    "archivo": "assets\\js\\excel-sgt.js",
+    "bytes": 17912,
+    "sha256": "a6165ea44825ad65dd08d75677bbd0d81cc17a409d3f25d3d03060f534994feb"
+  },
+  {
+    "archivo": "assets\\js\\generador-documentos.js",
+    "bytes": 11194,
+    "sha256": "7e567faf8c14822b7c2b3ee07de1fc175d1089d54a769af0293a796de959b03b"
+  },
+  {
+    "archivo": "assets\\js\\georeferenciacion.js",
+    "bytes": 23101,
+    "sha256": "ec79301e6c2500963a89b6106b3acafb61ef90757235a32bcdcfea40e60dd6bf"
+  },
+  {
+    "archivo": "assets\\js\\historial-junta.js",
+    "bytes": 4989,
+    "sha256": "7b4f508e91db51022d4c428012539ea11776225cd952c943d50d37b4bbe6499f"
+  },
+  {
+    "archivo": "assets\\js\\historial.js",
+    "bytes": 2082,
+    "sha256": "aef7757d8a2c791378895bc3681b8ce7f30b323420168404f252d15e668b717b"
+  },
+  {
+    "archivo": "assets\\js\\index.js",
+    "bytes": 1085,
+    "sha256": "3983ac5c8d6388f73e1ec7a8fa98304a870eafa5f2cda2dabdfac45da509f278"
+  },
+  {
+    "archivo": "assets\\js\\inicio.js",
+    "bytes": 4555,
+    "sha256": "bcf441a6625a5caffa65ac38baadb925337e6af56d3adc8291ee3f003c8c3540"
+  },
+  {
+    "archivo": "assets\\js\\junta-detalle.js",
+    "bytes": 11202,
+    "sha256": "f19ce613529c91ac3ce40b06f48d5d12d6c576f1c528ae837edb3b3286b7b52d"
+  },
+  {
+    "archivo": "assets\\js\\juntas.js",
+    "bytes": 4394,
+    "sha256": "9c2d1eedd0fe09569f97f2aac88f99eea49b089fdaf03cc59ec2c698dd4de553"
+  },
+  {
+    "archivo": "assets\\js\\logger.js",
+    "bytes": 2799,
+    "sha256": "aa2bf508f98b5877d455778571a792de8e92b144b719aec2d9db6fa14c969c6c"
+  },
+  {
+    "archivo": "assets\\js\\main.js",
+    "bytes": 3385,
+    "sha256": "1d697199cbe1164022da631f16790cff6e36e19ea79f67075f52e65def83d8e8"
+  },
+  {
+    "archivo": "assets\\js\\map-services.js",
+    "bytes": 18021,
+    "sha256": "e0316a0fc237531672ce81dac4c6734a567ae12d4718dcc8b607b52effd679c3"
+  },
+  {
+    "archivo": "assets\\js\\mapa.js",
+    "bytes": 29541,
+    "sha256": "d07040e6963a406be9dca949f515711e37e3456498c6a3b9fb1d186d856cef51"
+  },
+  {
+    "archivo": "assets\\js\\reportes-departamentos.js",
+    "bytes": 8087,
+    "sha256": "e73b588462bf4d138b1e48f46150afe435ff6b95def1faa5caccb495ec3bdf6b"
+  },
+  {
+    "archivo": "assets\\js\\reportes-juntas.js",
+    "bytes": 6271,
+    "sha256": "c3523efd023bd95756308933860314ad5638facac68d1b63077ade6dec83d681"
+  },
+  {
+    "archivo": "assets\\js\\reportes-simplificado.js",
+    "bytes": 4036,
+    "sha256": "f801fbb6e6de6486939a31fabb5bddfc43aba5311596c4057c8d8835a0680fdb"
+  },
+  {
+    "archivo": "assets\\js\\reportes.js",
+    "bytes": 16013,
+    "sha256": "b6723250573a48de95ad7ca6a15f219179ff215bc8934233cbe49a3ecf26496e"
+  },
+  {
+    "archivo": "assets\\js\\sgt-config.js",
+    "bytes": 375,
+    "sha256": "83745035919677d2bae972e904f5471212b9a0342de6f3c1e2b031d10b45c7e5"
+  },
+  {
+    "archivo": "assets\\js\\solicitud-detalle.js",
+    "bytes": 10727,
+    "sha256": "f14045c12757a2f3403d358ac2fac79d9bc62c7a63d40b120b4fa2d5c7a5d6ee"
+  },
+  {
+    "archivo": "assets\\js\\solicitud-form.js",
+    "bytes": 16882,
+    "sha256": "fd55f168d5494f77ec8d95c297ca4da47acef2d6a84e59087fe2be22f391922a"
+  },
+  {
+    "archivo": "assets\\js\\solicitudes.js",
+    "bytes": 8084,
+    "sha256": "08b58426a7d78ce1a7290dedf75b38932db51fcb00e0950a5b715911c8dd63d8"
+  },
+  {
+    "archivo": "webview\\js\\api.js",
+    "bytes": 8612,
+    "sha256": "cb68b8bed427fa356aea26376e497552f55d91329c093c026a65230d074e2b27"
+  },
+  {
+    "archivo": "webview\\js\\customize.js",
+    "bytes": 4443,
+    "sha256": "ed14d0b594266dfe3834cc8565b44a8157420432aeef4f733ab505bd6ed89b8a"
+  },
+  {
+    "archivo": "webview\\js\\finish.js",
+    "bytes": 357,
+    "sha256": "751443083dd1d2b2ef4142692f25bc4f6e04f8de4d82c455c73473700f00c8cb"
+  },
+  {
+    "archivo": "webview\\js\\state.js",
+    "bytes": 1828,
+    "sha256": "68ee87ec01563cbcab77a57704a32f19b47436c9d5e254bfba9675a51c132075"
+  },
+  {
+    "archivo": "webview\\js\\lib\\dom_json.js",
+    "bytes": 26097,
+    "sha256": "70fae2a8a8ebc790dc616aa7976074cedd802275c173c90ad4bf3bd14163f9c4"
+  },
+  {
+    "archivo": "webview\\js\\lib\\polyfill.js",
+    "bytes": 27434,
+    "sha256": "481a08f5337a770acf49b38c2f58dd0c95f92bf9dbd92bf82b596836ea343ab5"
+  }
+]

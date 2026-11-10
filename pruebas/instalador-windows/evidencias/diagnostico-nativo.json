@@ -1,0 +1,14 @@
+{
+  "ventanas_sgt": [
+    "SGT Municipal - San Bernardo"
+  ],
+  "proceso_codigo": null,
+  "logs": [
+    {
+      "archivo": "cloud_sync_error.log",
+      "bytes": 126,
+      "marcadores": []
+    }
+  ],
+  "procesos_webview": 6
+}

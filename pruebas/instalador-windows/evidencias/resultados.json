@@ -1,0 +1,498 @@
+[
+  {
+    "prueba": "Instalación",
+    "estado": "PASS",
+    "detalle": {
+      "sha256": "35a2077282a559f4436ce0b887b7bdde3c758cfce35f1aad89e90781f51bc65d"
+    }
+  },
+  {
+    "prueba": "Aislamiento de nube",
+    "estado": "PASS",
+    "detalle": "Configuración remota retirada antes del arranque"
+  },
+  {
+    "prueba": "Servidor del ejecutable instalado",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Recursos empaquetados",
+    "estado": "PASS",
+    "detalle": "71 archivos HTML/JS/CSS localizados"
+  },
+  {
+    "prueba": "Ventana nativa WebView",
+    "estado": "PENDIENTE",
+    "detalle": "No se confirmó una ventana visible"
+  },
+  {
+    "prueba": "API sin sesión",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Usuario configurado en secreto",
+    "estado": "DIFERENCIA",
+    "detalle": {
+      "usuario": "admin",
+      "http": 401
+    }
+  },
+  {
+    "prueba": "Usuario ADMINISTRADOR del ZIP",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Acceso administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "SQLite inicial",
+    "estado": "PASS",
+    "detalle": {
+      "juntas": 0,
+      "solicitudes": 0
+    }
+  },
+  {
+    "prueba": "Generación de Excel",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "WebView2 conectado mediante CDP",
+    "estado": "PENDIENTE",
+    "detalle": "Error"
+  },
+  {
+    "prueba": "Acceso funcionario",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200
+    }
+  },
+  {
+    "prueba": "Funcionario no importa madre",
+    "estado": "PASS",
+    "detalle": 403
+  },
+  {
+    "prueba": "Administrador pobla con madre por API",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "juntas": 1,
+      "solicitudes": 1
+    }
+  },
+  {
+    "prueba": "Reimportación madre sin duplicados",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Funcionario no modifica juntas",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Funcionario no genera plantilla",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Funcionario importa Forms por API",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Forms evita duplicado",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Acceso mediante formulario administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Creación manual por interfaz administrador",
+    "estado": "PASS",
+    "detalle": {
+      "ruta": "solicitud-detalle.html?folio=SGT-DEM-0003"
+    }
+  },
+  {
+    "prueba": "Edición a En proceso administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Cierre manual administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Fecha de cierre administrador",
+    "estado": "HALLAZGO",
+    "detalle": "El cierre manual no dejó fechaCierre"
+  },
+  {
+    "prueba": "Eliminación lógica administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Pantalla con datos administrador inicio",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador juntas",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador solicitudes",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador mapa",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador cargar-excel",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador estadisticas",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador historial",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador entrantes-web",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos administrador logs",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Vista previa del reporte administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "PDF real por interfaz administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Minuta por interfaz administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Importación madre por selector administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Importación forms por selector administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Adjuntar evidencia por carpeta administrador",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Ciclo dinámico generar-completar-importar por UI",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Acceso mediante formulario funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Creación manual por interfaz funcionario",
+    "estado": "PASS",
+    "detalle": {
+      "ruta": "solicitud-detalle.html?folio=SGT-DEM-0007"
+    }
+  },
+  {
+    "prueba": "Edición a En proceso funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Cierre manual funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Fecha de cierre funcionario",
+    "estado": "HALLAZGO",
+    "detalle": "El cierre manual no dejó fechaCierre"
+  },
+  {
+    "prueba": "Eliminación lógica funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Pantalla con datos funcionario inicio",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario juntas",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario solicitudes",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario mapa",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario cargar-excel",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario estadisticas",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario historial",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario entrantes-web",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla con datos funcionario logs",
+    "estado": "PASS",
+    "detalle": {
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Vista previa del reporte funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "PDF real por interfaz funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Minuta por interfaz funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Selector bloquea madre al funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Importación forms por selector funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Adjuntar evidencia por carpeta funcionario",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Permiso de descarga PDF funcionario",
+    "estado": "PASS",
+    "detalle": 200
+  },
+  {
+    "prueba": "Funcionario cierra sesión",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Token cerrado ya no accede",
+    "estado": "PASS",
+    "detalle": ""
+  },
+  {
+    "prueba": "Pantalla inicio",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla juntas",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla solicitudes",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla mapa",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla cargar-excel",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla estadisticas",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla reportes",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla generador-documentos",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla historial",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Pantalla entrantes-web",
+    "estado": "PASS",
+    "detalle": {
+      "http": 200,
+      "errores_js": 0
+    }
+  },
+  {
+    "prueba": "Diagnóstico ventana nativa",
+    "estado": "PASS",
+    "detalle": {
+      "ventanas_sgt": [
+        "SGT Municipal - San Bernardo"
+      ],
+      "proceso_codigo": null,
+      "logs": [
+        {
+          "archivo": "cloud_sync_error.log",
+          "bytes": 126,
+          "marcadores": []
+        }
+      ],
+      "procesos_webview": 6
+    }
+  },
+  {
+    "prueba": "Persistencia tras cerrar y reabrir SGT.exe",
+    "estado": "PASS",
+    "detalle": {
+      "antes": {
+        "juntas": 1,
+        "solicitudes": 8
+      },
+      "despues": {
+        "juntas": 1,
+        "solicitudes": 8
+      }
+    }
+  }
+]

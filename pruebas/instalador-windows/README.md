@@ -11,3 +11,7 @@ Antes del primer arranque se elimina la configuración de sincronización de la 
 No se modifican los HTML: primero se verifica el comportamiento original. Cualquier adaptación posterior debe identificarse en el informe.
 
 El workflow se ejecuta cuando se incorpora o actualiza el instalador cifrado en esta rama. Primero deben estar configurados los secretos. Se consulta en Actions. Revisar `resultados.json`, `inventario-recursos.json` y las capturas del artefacto. Los recursos originales no se publican porque pueden contener claves.
+
+## Resultados
+
+Consulta el [informe funcional](INFORME.md). Las evidencias seleccionadas en `evidencias/` usan datos ficticios y permanecen disponibles aunque expire el artefacto de Actions.
