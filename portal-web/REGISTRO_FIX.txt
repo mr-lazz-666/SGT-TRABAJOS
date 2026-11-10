@@ -230,3 +230,33 @@ Archivo nuevo opcional: ABRIR_PORTAL_SGT.bat
 
 Paquete: portal-web/entregas/FIX-PORTAL-002.zip
 Detalle: archivos TXT incluidos en el paquete.
+
+============================================================
+MANTENIMIENTO - ORGANIZACIÓN DE CARPETAS DE DESARROLLO
+============================================================
+FECHA: 10/11/2026
+ZONA: America/Santiago (UTC-03:00)
+INICIO REGISTRADO: 20:22:50
+FIN DE COMPROBACIONES: 20:23:53
+INTERVALO OBSERVADO: 1 min 3 s (0,01750 h); incluye procesos.
+Imputación por actividad: sin desglose cronometrado; pendiente de validar.
+
+PEDIDO: ordenar los FIX por su propósito sin alterar entregas.
+CAMBIOS:
+- FIX-PORTAL-001 se movió a:
+  portal-web/desarrollo/formulario-vecinos/FIX-PORTAL-001
+- FIX-PORTAL-002 se movió a:
+  portal-web/desarrollo/portal-completo/FIX-PORTAL-002
+- Se añadieron índices README y se ajustó el enlace de mantenimiento.
+- Los registros anteriores conservan sus rutas históricas; el índice
+  portal-web/README.md indica las ubicaciones actuales equivalentes.
+
+VALIDACIÓN:
+Construcción desde la nueva ruta, contratos, temas y recorrido Worker
+con SQLite local: correctos.
+Los 11 archivos de portal-web/entregas conservan nombres, rutas y SHA-256.
+El candidato reconstruido coincide con el Worker ya entregado.
+
+NO SE MODIFICÓ: entregas, ZIP distribuido, diseño, preview, API,
+configuración Cloudflare, base de datos ni aplicación original.
+ESTADO: ORGANIZACIÓN COMPLETADA; sin despliegue de producto.

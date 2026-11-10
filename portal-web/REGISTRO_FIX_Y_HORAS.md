@@ -123,4 +123,8 @@ FIX-PORTAL-XXX/
 └── REGISTRO_FIX.md
 ```
 
-Esta sección documenta el criterio indicado por el propietario. El candidato del primer diseño está en `FIX-PORTAL-001/candidato/`, pendiente de aprobación; no es una entrega aplicada al portal real.
+Esta sección documenta el criterio indicado por el propietario. El candidato del primer diseño está en `desarrollo/formulario-vecinos/FIX-PORTAL-001/candidato/`, pendiente de aprobación; no es una entrega aplicada al portal real.
+
+## Ubicación de los FIX de desarrollo
+
+La propuesta inicial está en `desarrollo/formulario-vecinos/FIX-PORTAL-001`; el portal completo aprobado está en `desarrollo/portal-completo/FIX-PORTAL-002`. La carpeta `entregas` conserva sus archivos, hashes y rutas anteriores. Consultar [el índice](README.md) para localizar las fuentes actuales.

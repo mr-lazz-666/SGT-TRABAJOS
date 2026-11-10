@@ -52,6 +52,6 @@ Se comprobó sintaxis, generación de las cuatro páginas, conservación de IDs,
 
 ## Entrega simple
 
-El paquete listo para descargar está en `../../entregas/FIX-PORTAL-002.zip`. Incluye instrucciones manuales TXT, un prompt TXT para la IA del destinatario, registro de validaciones y hashes. Las fuentes de esta carpeta son para mantenimiento; no hace falta editarlas para instalar.
+El paquete listo para descargar está en [FIX-PORTAL-002.zip](../../../entregas/FIX-PORTAL-002.zip?raw=true). Incluye instrucciones manuales TXT, un prompt TXT para la IA del destinatario, registro de validaciones y hashes. Las fuentes de esta carpeta son para mantenimiento; no hace falta editarlas para instalar.
 
 Pruebas adicionales: `node pruebas/temas.cjs` y `node pruebas/flujo-worker.mjs` (esta última necesita Python disponible y usa solo SQLite temporal).
