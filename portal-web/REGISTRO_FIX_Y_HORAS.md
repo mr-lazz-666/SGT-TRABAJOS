@@ -1,4 +1,6 @@
-# Portal SGT — Registro de FIX y horas
+# Portal SGT — Criterios de documentación y entrega
+
+La bitácora oficial de cambios de diseño se llevará en [REGISTRO_FIX.txt](REGISTRO_FIX.txt), compatible con Bloc de notas. Comienza con los próximos cambios solicitados; este documento conserva los criterios de trabajo y la apertura documental, sin imputar horas de diseño anteriores.
 
 Rama de trabajo: `trabajo/portal-web`.
 

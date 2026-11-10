@@ -1,0 +1,83 @@
+SGT - PORTAL WEB
+REGISTRO DE FIX Y CAMBIOS DE DISEÑO
+
+Apertura del registro: 10/11/2026, 19:12:55
+Zona horaria: America/Santiago (UTC-03:00 en esta fecha).
+Rama: trabajo/portal-web
+
+ALCANCE
+El registro empieza con los próximos cambios de diseño solicitados.
+No se imputan horas de análisis, pruebas ni réplicas anteriores.
+La apertura de esta bitácora no constituye un cambio de diseño.
+Todavía no hay FIX de diseño registrados.
+
+Cada FIX documentará el trabajo en la preview y los archivos reales
+preparados para reemplazo. La aprobación e integración se anotarán
+por separado. Las pausas entre mensajes no se sumarán como trabajo.
+No se completarán duraciones sin un registro que las respalde.
+
+------------------------------------------------------------
+FORMATO PARA CADA FIX
+------------------------------------------------------------
+
+FIX-PORTAL-001 - [Nombre del cambio]
+
+FECHA: [DD/MM/AAAA]
+ZONA HORARIA: [America/Santiago y desfase UTC de ese día]
+HORA DE INICIO: [HH:MM:SS]
+HORA DE FIN: [HH:MM:SS]
+
+APARTADO:
+[Vecinos / Presidentes / Seguimiento / componente compartido]
+
+SOLICITUD:
+[Qué pidió el propietario]
+
+QUÉ SE HIZO:
+- [Cambio realizado]
+- [Cambio realizado]
+
+ARCHIVOS MODIFICADOS:
+- [Ruta exacta del archivo real y parte modificada]
+
+DISTRIBUCIÓN DE TIEMPO:
+Análisis:                       [minutos / horas]
+HTML:                           [minutos / horas]
+CSS:                            [minutos / horas]
+JavaScript de interfaz:         [minutos / horas]
+Validación:                     [minutos / horas]
+Documentación y entrega:        [minutos / horas]
+TOTAL ACTIVO REGISTRADO:        [minutos / horas]
+Espera automática, por separado:[minutos / horas]
+
+INTERVALOS QUE RESPALDAN EL TOTAL:
+[Actividad | inicio | fin | duración | medido o estimado]
+No sumar dos veces intervalos simultáneos.
+Si no hay evidencia suficiente: PENDIENTE DE VALIDAR.
+
+VALIDACIÓN:
+[Qué se comprobó, resultado y comprobaciones pendientes]
+
+PREVIEW:
+[Enlace y versión]
+
+ESTADO:
+[En trabajo / En preview / Cambios solicitados / Aprobado]
+
+APROBACIÓN DEL PROPIETARIO:
+[Pendiente o fecha y hora de aprobación]
+
+ENTREGA PARA REEMPLAZO:
+[Pendiente o archivos completos, carpeta del FIX y commit]
+
+INTEGRACIÓN AL SISTEMA REAL:
+[Pendiente / Autorizada / Aplicada, con fecha y evidencia]
+Para el portal Cloudflare, reemplazar worker.js requiere volver
+ a publicarlo para actualizar el portal remoto.
+
+OBSERVACIONES:
+[Dependencias, límites comprobados o instrucciones de reversión]
+
+------------------------------------------------------------
+FIN DE LA PLANTILLA - AÑADIR LOS FIX REALES DEBAJO
+------------------------------------------------------------
