@@ -28,11 +28,16 @@ def probar_flujos(api,note,admin,accounts,out,data):
   browser=p.chromium.launch()
   for role,session in [('administrador',admin),('funcionario',func)]:
    context=browser.new_context(viewport={'width':1440,'height':1000})
-   context.add_init_script('sessionStorage.setItem("sgt_token",'+json.dumps(session['token'])+');sessionStorage.setItem("sgt_user",'+json.dumps(json.dumps(session['user']))+');')
    page=context.new_page();dialogs=[]
    page.on('dialog',lambda d:(dialogs.append(d.message),d.accept()))
    def goto(name):page.goto('http://127.0.0.1:8765/pages/'+name,wait_until='load',timeout=30000)
    try:
+    page.goto('http://127.0.0.1:8765/index.html',wait_until='load')
+    page.locator('#usuarioInput').select_option(role.upper())
+    page.locator('#passwordInput').fill(accounts[role.upper()])
+    page.get_by_role('button',name='Iniciar sesión',exact=False).click()
+    page.wait_for_url('**/pages/inicio.html',timeout=15000)
+    check('Acceso mediante formulario '+role,True)
     goto('solicitud-form.html')
     page.locator('#fJunta').select_option(jid)
     page.locator('#fCategoria').select_option(index=1)
@@ -70,6 +75,52 @@ def probar_flujos(api,note,admin,accounts,out,data):
      if name in ['inicio','mapa','estadisticas']:page.screenshot(path=str(out/(role+'-'+name+'.png')),full_page=True)
     except Exception as e:note('Pantalla con datos '+role+' '+name,'FAIL',type(e).__name__)
     page.remove_listener('pageerror',on_error)
+   try:
+    goto('generador-documentos.html')
+    page.locator('#incluirResueltas').check()
+    page.locator('#preview').click()
+    check('Vista previa del reporte '+role,'Luminaria' in page.locator('#docPreview').inner_text())
+    before=set((data/'reportes_temporales').glob('*.pdf'))
+    page.locator('#download').click();page.wait_for_timeout(1300)
+    new=set((data/'reportes_temporales').glob('*.pdf'))-before
+    check('PDF real por interfaz '+role,any(x.read_bytes().startswith(b'%PDF') and x.stat().st_size>500 for x in new))
+    page.locator('#tipo').select_option('minuta')
+    page.locator('#tituloReunion').fill('Reunión ficticia de ensayo')
+    page.locator('#acuerdos').fill('Compromiso ficticio para validar exportación')
+    page.locator('#preview').click()
+    check('Minuta por interfaz '+role,'Compromiso ficticio' in page.locator('#docPreview').inner_text())
+    page.screenshot(path=str(out/(role+'-minuta.png')),full_page=True)
+   except Exception as e:note('Reportes por interfaz '+role,'FAIL',type(e).__name__)
+   # Los otros dos importadores también se recorren mediante el selector de archivos.
+   for fmt in ['madre','forms']:
+    try:
+     goto('cargar-excel.html')
+     wb=Workbook();ws=wb.active;ws.title='Solicitudes'
+     ws.append(['Folio Junta','Codigo Junta','Nombre del lugar (Opcional)','Direccion','Lat','Lng','Presidente','Categoria','Prioridad','Estado','Requerimiento','Gestion','Departamento','Encargado','Confianza(1-10)','Fecha','Direccion Problema (Opcional)','Estatus (Opcional)','Observaciones','Junta de Vecinos (nombre real)'])
+     requirement='Ensayo selector '+fmt+' '+role
+     ws.append([j['nombre'],j['codigo'],'','',j['lat'],j['lng'],'Representante Ficticio','2. Iluminación y alumbrado público','Media','Pendiente',requirement,'Gestión ficticia','Operaciones','Personal ficticio',5,'10/11/2026','','','',j['nombre']])
+     target=pathlib.Path('SGT_MADRE.xlsx' if fmt=='madre' else 'SGTE_FORMS.xlsx');wb.save(target)
+     page.locator('#excelInput').set_input_files(str(target))
+     page.wait_for_timeout(1200)
+     if fmt=='madre' and role=='funcionario':
+      check('Selector bloquea madre al funcionario',page.locator('#btnImportarSGT').is_disabled())
+     else:
+      page.wait_for_function('!document.getElementById("btnImportarSGT").disabled',timeout=45000)
+      page.locator('#btnImportarSGT').click();page.wait_for_timeout(1000)
+      _,st=api('/api/db',token=a)
+      check('Importación '+fmt+' por selector '+role,any(x.get('requerimiento')==requirement for x in st['solicitudes'].values()))
+    except Exception as e:note('Selector '+fmt+' '+role,'FAIL',type(e).__name__)
+   try:
+    goto('adjuntar-carpeta.html')
+    image=page.evaluate("() => {let c=document.createElement('canvas');c.width=20;c.height=20;c.getContext('2d').fillRect(0,0,20,20);return c.toDataURL('image/png').split(',')[1]}")
+    folder=pathlib.Path('fotos-'+role);folder.mkdir(exist_ok=True)
+    filename='SGT-JV-'+j['codigo']+'-0001-'+('1' if role=='administrador' else '2')+'.png'
+    (folder/filename).write_bytes(base64.b64decode(image))
+    page.locator('#carpetaInput').set_input_files(str(folder.resolve()))
+    page.locator('#btnAdjuntar').click();page.wait_for_timeout(1000)
+    _,st=api('/api/db',token=a)
+    check('Adjuntar evidencia por carpeta '+role,any(filename in x.get('fotosData',{}) for x in st['solicitudes'].values()))
+   except Exception as e:note('Evidencia por interfaz '+role,'FAIL',type(e).__name__)
    # UI real del archivo dinámico: generar, completar y reimportar.
    if role=='administrador':
     try:

@@ -24,6 +24,7 @@ data=pathlib.Path(os.environ['LOCALAPPDATA'])/'SGT Municipal'
 for p in [data/'cloud_config.json',exe.parent/'cloud_config.json']:
  if p.exists():p.unlink()
 note('Aislamiento de nube','PASS','Configuración remota retirada antes del arranque')
+os.environ['WEBVIEW2_ADDITIONAL_BROWSER_ARGUMENTS']='--remote-debugging-port=9222'
 proc=subprocess.Popen([str(exe)],cwd=exe.parent)
 try:
  ready=False
@@ -73,6 +74,16 @@ try:
  note('SQLite inicial','PASS' if status==200 else 'FAIL',{'juntas':len(state.get('juntas',{})),'solicitudes':len(state.get('solicitudes',{}))})
  status,_=api('/api/excel-template',token=token)
  note('Generación de Excel','PASS' if status==200 else 'FAIL')
+ # Verificar WebView tras dar tiempo a splash y creación de ventana.
+ time.sleep(4)
+ try:
+  with sync_playwright() as pw:
+   native_browser=pw.chromium.connect_over_cdp('http://127.0.0.1:9222',timeout=10000)
+   native_pages=[page for c in native_browser.contexts for page in c.pages if '127.0.0.1' in page.url]
+   note('WebView2 conectado mediante CDP','PASS' if native_pages else 'PENDIENTE')
+   if native_pages:
+    native_pages[0].screenshot(path=str(out/'webview-nativo.png'))
+ except Exception as e:note('WebView2 conectado mediante CDP','PENDIENTE',type(e).__name__)
  from flujos import probar_flujos
  probar_flujos(api,note,session,accounts,out,data)
  with sync_playwright() as p:
