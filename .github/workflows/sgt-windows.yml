@@ -2,7 +2,7 @@ name: SGT - prueba del instalador Windows
 on:
   push:
     branches: [pruebas/instalador-windows]
-    paths: ['pruebas/instalador-windows/SGT_Setup.exe.enc']
+    paths: ['pruebas/instalador-windows/**', '.github/workflows/sgt-windows.yml']
 permissions:
   contents: read
 jobs:
@@ -16,7 +16,7 @@ jobs:
           python-version: '3.12'
       - name: Preparar herramientas de prueba
         run: |
-          python -m pip install playwright
+          python -m pip install playwright openpyxl
           python -m playwright install chromium
       - name: Descifrar instalador
         shell: bash
@@ -26,6 +26,7 @@ jobs:
           set -euo pipefail
           test -n "$INSTALLER_KEY"
           openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in pruebas/instalador-windows/SGT_Setup.exe.enc -out "$RUNNER_TEMP/SGT_Setup.exe" -pass env:INSTALLER_KEY
+          openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -in pruebas/instalador-windows/cuentas.json.enc -out "$RUNNER_TEMP/cuentas.json" -pass env:INSTALLER_KEY
       - name: Instalar sin interacción
         shell: pwsh
         run: |
@@ -38,6 +39,7 @@ jobs:
           if ($p.ExitCode -ne 0) { throw "Instalación fallida: $($p.ExitCode)" }
       - name: Probar aplicación instalada y recursos
         env:
+          SGT_TEST_ACCOUNTS: ${{ runner.temp }}/cuentas.json
           SGT_TEST_CREDENTIALS: ${{ secrets.SGT_TEST_CREDENTIALS }}
         run: python pruebas/instalador-windows/probar.py
       - name: Guardar evidencias revisables

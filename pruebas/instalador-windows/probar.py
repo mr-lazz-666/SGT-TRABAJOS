@@ -7,7 +7,7 @@ results=[]
 def note(name,status,detail=''):
  results.append(dict(prueba=name,estado=status,detalle=detail))
  (out/'resultados.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')
- print(name+': '+status,flush=True)
+ print(name+': '+status+' '+json.dumps(detail,ensure_ascii=True),flush=True)
 def api(path,body=None,token=None):
  h={'Content-Type':'application/json'}
  if token:h['Authorization']='Bearer '+token
@@ -58,8 +58,14 @@ try:
  note('Ventana nativa WebView','PASS' if native else 'PENDIENTE','Detectada por título de ventana' if native else 'No se confirmó una ventana visible')
  if not ready:raise RuntimeError('Servidor no disponible')
  note('API sin sesión','PASS' if api('/api/db')[0]==401 else 'FAIL')
+ accounts=json.loads(pathlib.Path(os.environ['SGT_TEST_ACCOUNTS']).read_text())
  credentials=json.loads(os.environ['SGT_TEST_CREDENTIALS'])
  status,session=api('/api/login',credentials)
+ note('Usuario configurado en secreto', 'PASS' if status==200 else 'DIFERENCIA', {'usuario':credentials.get('usuario'),'http':status})
+ if status!=200:
+  status,session=api('/api/login',{'usuario':'ADMINISTRADOR','password':accounts['ADMINISTRADOR']})
+  note('Usuario ADMINISTRADOR del ZIP','PASS' if status==200 else 'FAIL')
+
  note('Acceso administrador','PASS' if status==200 else 'FAIL')
  if status!=200:raise RuntimeError('Acceso no disponible')
  token=session['token']
@@ -67,6 +73,8 @@ try:
  note('SQLite inicial','PASS' if status==200 else 'FAIL',{'juntas':len(state.get('juntas',{})),'solicitudes':len(state.get('solicitudes',{}))})
  status,_=api('/api/excel-template',token=token)
  note('Generación de Excel','PASS' if status==200 else 'FAIL')
+ from flujos import probar_flujos
+ probar_flujos(api,note,session,accounts,out,data)
  with sync_playwright() as p:
   browser=p.chromium.launch()
   context=browser.new_context(viewport={'width':1440,'height':1000})
