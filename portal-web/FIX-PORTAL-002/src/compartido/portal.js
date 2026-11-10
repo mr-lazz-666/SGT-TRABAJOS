@@ -1,0 +1,1 @@
+(()=>{let choice='institucional';try{choice=localStorage.getItem('sgt_portal_tema')||choice;}catch{}if(!['institucional','claro','minimal'].includes(choice))choice='institucional';document.body.dataset.theme=choice;})();

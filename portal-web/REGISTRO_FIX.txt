@@ -136,3 +136,69 @@ INTEGRACIÓN REAL: NO APLICADA.
 OBSERVACIÓN: La API de demostración de la preview no forma parte
  del candidato para reemplazo. Los archivos de diseno son editables;
  el reemplazo previsto conserva un único worker.js autocontenido.
+
+
+============================================================
+FIX-PORTAL-002 - PORTADA OSCURA Y NAVEGACIÓN POR TIPO DE USUARIO
+============================================================
+FECHA: 10/11/2026
+ZONA: America/Santiago, UTC-03:00
+INICIO: 19:37:26
+PUBLICACIÓN DE PREVIEW CONFIRMADA: 19:42:14
+INTERVALO OBSERVADO HASTA PUBLICACIÓN: 4 min 48 s (0,08000 h)
+
+SOLICITUD:
+Portada más oscura, dos opciones centrales Vecinos y Presidentes,
+explicaciones al pasar el mouse, Seguimiento dentro de Vecinos,
+archivos separados por apartado y variantes seleccionables con clic.
+
+QUÉ SE HIZO:
+- Portada de dos tarjetas con explicación al pasar mouse o recibir foco.
+- Explicaciones siempre visibles en pantallas táctiles.
+- Tres variantes: Azul institucional, Tarjetas claras y Minimal.
+- Selección de estilo guardada en el navegador de la preview.
+- Seguimiento dentro de Vecinos, separado del envío de solicitud.
+- Portal de Presidentes enlazado al acceso y revisión existentes.
+- Logo municipal y colores institucionales conservados.
+- Fuentes HTML/CSS/JS organizadas por apartado.
+- Empaquetador Python estándar para reconstruir worker.js completo.
+- Candidato autocontenido; el flujo de negocio continúa igual al ZIP.
+- Portada de la preview actualizada; acceso anterior de escritorio
+  conservado en /acceso-sgt.html dentro de la copia de demostración.
+
+ARCHIVOS:
+portal-web/FIX-PORTAL-002/src/compartido/
+portal-web/FIX-PORTAL-002/src/inicio/
+portal-web/FIX-PORTAL-002/src/vecinos/
+portal-web/FIX-PORTAL-002/src/presidentes/
+portal-web/FIX-PORTAL-002/src/seguimiento/
+portal-web/FIX-PORTAL-002/construir.py
+portal-web/FIX-PORTAL-002/candidato/SERVIDOR_CLOUDFLARE/worker.js
+portal-web/FIX-PORTAL-002/pruebas/contratos.mjs
+
+TIEMPO:
+Intervalo observado: 288 segundos; incluye procesos automáticos.
+Llamada de publicación: 25,1 segundos, según herramienta.
+Análisis, HTML, CSS, JavaScript, pruebas y documentación no tienen
+cronometraje independiente. Reparto por rubro e imputación de horas:
+PENDIENTES DE VALIDAR. No se asignan minutos retrospectivos por rubro.
+Cierre administrativo en GitHub posterior a la publicación.
+
+VALIDACIÓN:
+- Sintaxis de los controladores y del candidato: correcta.
+- Portada y tres apartados generan HTTP 200.
+- IDs de controles originales: conservados.
+- Backend a partir de const js: idéntico, salvo portada / que ahora
+  abre la elección de rol. API, SQL y permisos no se cambian.
+- Contratos de errores para solicitudes, presidentes y sincronización:
+  iguales al Worker base.
+- Revisión visual y prueba Cloudflare de integración: pendientes.
+- Se conserva la corrección sintáctica de saltos de línea del JS de
+  Seguimiento que ya se había detectado en la réplica.
+
+PREVIEW:
+https://sgt-replica-navegable.warmcactus.chatgpt.site/?diseno=fix002
+Versión: appgprj_6af37c9be8ec81919f40f5a2cbdca28e~appgver_2695a27744cc819191f403c7e3a4e400
+ESTADO: EN PREVIEW, variante final todavía sin elegir.
+APROBACIÓN: PENDIENTE.
+INTEGRACIÓN AL PORTAL REAL: NO APLICADA.
