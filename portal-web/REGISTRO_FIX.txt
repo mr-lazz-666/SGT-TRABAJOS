@@ -202,3 +202,31 @@ Versión: appgprj_6af37c9be8ec81919f40f5a2cbdca28e~appgver_2695a27744cc819191f40
 ESTADO: EN PREVIEW, variante final todavía sin elegir.
 APROBACIÓN: PENDIENTE.
 INTEGRACIÓN AL PORTAL REAL: NO APLICADA.
+
+
+============================================================
+FIX-PORTAL-002 - APROBACIÓN Y PREPARACIÓN DE ENTREGA
+============================================================
+SGT - FIX-PORTAL-002 - CIERRE DE ENTREGA
+Fecha: 10/11/2026
+Zona: America/Santiago (UTC-03:00)
+Inicio de preparación de entrega: 19:51:39
+Preview final publicada y confirmada: 19:57:26
+Intervalo observado hasta publicación: 5 min 47 s (0,09639 h)
+El intervalo incluye procesos; no es una imputación de horas aprobada.
+Llamada de publicación: 25,9 segundos según la herramienta.
+No hay desglose cronometrado por actividad: no se inventa un reparto.
+El cierre administrativo del ZIP y GitHub ocurre después.
+
+Aprobación del diseño recibida del propietario en esta conversación.
+Pedido adicional incorporado: mantener los tres temas en todas las páginas.
+Estado: ENTREGA PREPARADA. No publicada en Cloudflare de producción.
+La preview y el Worker de entrega comparten HTML/CSS/JS; solo se adaptan
+los enlaces y la API de demostración al publicar la preview.
+
+Rama: trabajo/portal-web
+Archivos para reemplazo: SERVIDOR_CLOUDFLARE/worker.js
+Archivo nuevo opcional: ABRIR_PORTAL_SGT.bat
+
+Paquete: portal-web/entregas/FIX-PORTAL-002.zip
+Detalle: archivos TXT incluidos en el paquete.

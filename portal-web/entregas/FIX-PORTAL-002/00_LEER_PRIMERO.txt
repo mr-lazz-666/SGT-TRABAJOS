@@ -1,0 +1,37 @@
+SGT - FIX-PORTAL-002
+ENTREGA DE DISEÑO DEL PORTAL
+
+El diseño fue aprobado por el propietario en esta conversación.
+Este paquete no ha sido publicado en el Cloudflare real.
+
+CAMBIO PRINCIPAL
+Portada oscura con Vecinos y Presidentes, explicaciones al pasar
+el mouse, Seguimiento dentro de Vecinos y tres temas opcionales
+(Azul institucional, Claro y Grafito) en todas las pantallas.
+Se conserva el logo municipal original.
+
+PARA INTEGRAR
+1. Lea 01_INTEGRACION_MANUAL.txt.
+2. Reemplace únicamente SERVIDOR_CLOUDFLARE\worker.js.
+3. Vuelva a publicar el Worker en Cloudflare siguiendo esa guía.
+4. Abra la URL raíz del portal para ver la nueva portada.
+
+ABRIR_PORTAL_SGT.bat es opcional: abre la portada en el navegador.
+Puede colocarlo en la raíz del proyecto. No publica el Worker.
+El .bat antiguo del ZIP abre Vecinos y Presidentes directamente;
+no necesita ser borrado ni reemplazado.
+
+PARA SU IA
+Entregue 02_PROMPT_PARA_IA.txt junto con este paquete y su proyecto.
+No es necesario usar IA si sigue la integración manual.
+
+NO INCLUYE NI REQUIERE
+- Base de datos nueva, migración SQL o cambios de esquema.
+- Claves, tokens, contraseñas o cuentas de demostración.
+- Cambios en SGT.exe, Python, Excel ni el instalador.
+- Los adaptadores de simulación de la preview.
+- Reemplazo de wrangler.toml o de schema.sql.
+
+La validación local realizada se describe en
+03_FIX_Y_VALIDACIONES.txt. No equivale a certificar el entorno
+Cloudflare real ni elimina la comprobación posterior al despliegue.

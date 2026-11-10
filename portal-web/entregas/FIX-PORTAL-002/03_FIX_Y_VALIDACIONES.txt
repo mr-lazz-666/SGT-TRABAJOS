@@ -1,0 +1,61 @@
+SGT - REGISTRO DE ENTREGA - FIX-PORTAL-002
+FECHA: 10/11/2026
+ZONA HORARIA: America/Santiago
+ESTADO: DISEÑO APROBADO POR EL PROPIETARIO; ENTREGA PREPARADA.
+PUBLICACIÓN EN EL PORTAL REAL: NO REALIZADA.
+
+CAMBIOS
+- Portada / con Vecinos y Presidentes como opciones centrales.
+- Información adicional al pasar mouse o enfocar con teclado.
+- Información visible en dispositivos táctiles.
+- Vecinos conserva envío directo y Seguimiento en su propio apartado.
+- Presidentes conserva acceso, revisión y aceptación/rechazo.
+- Temas opcionales Azul institucional, Claro y Grafito en las cuatro
+  pantallas, guardados localmente en el navegador.
+- Logo municipal original incluido; no necesita subir imágenes aparte.
+- Fuentes organizadas por HTML/CSS/JS; entrega real autocontenida
+  en worker.js para conservar la arquitectura del ZIP.
+- Corrección de saltos de línea en el JavaScript de Seguimiento para
+  evitar un error de sintaxis en el HTML generado.
+
+ARCHIVO REAL QUE SE REEMPLAZA
+SERVIDOR_CLOUDFLARE/worker.js
+
+ARCHIVO NUEVO OPCIONAL
+ABRIR_PORTAL_SGT.bat
+
+QUÉ NO SE CAMBIA
+Rutas API, nombres de campos, contratos JSON, SQL, validaciones de
+negocio, roles, sesiones, estados y sincronización. Vecinos sigue
+creando pendiente_presidente; la aceptación presidencial continúa
+siendo parte del flujo anterior. No se modifica SGT.exe ni Excel.
+
+PRUEBAS LOCALES REALIZADAS
+- Sintaxis del candidato con Node: correcta.
+- Generación de /, /vecinos, /presidentes y /seguimiento: HTTP 200.
+- IDs originales de controles: conservados.
+- Comparación del código de backend con el ZIP: igual, salvo la
+  ruta raíz que ahora muestra la portada en lugar de redirigir.
+- Contratos de rechazo básicos: coinciden con el Worker base.
+- Recorrido con módulo Worker y SQLite local: juntas, alta de
+  presidente, envío vecinal, código, login presidencial, listado,
+  aceptación, descarga municipal, recepción y estados hasta Resuelta.
+- Protección frente a una segunda decisión presidencial: HTTP 409.
+- Selector de tres temas: clic, estado accesible y persistencia.
+- Revisión de hashes y contenido del ZIP de entrega: realizada.
+
+LÍMITES
+La prueba de SQLite utiliza un adaptador local que simula la interfaz
+D1. No certifica Cloudflare real, red, cuotas o concurrencia.
+La preview tiene API de demostración; esa API NO se entrega.
+El propietario aprobó el diseño mostrado. El selector permanente de
+los tres temas se añadió a su pedido posterior. Falta la comprobación
+en el navegador y entorno real del destinatario tras desplegar.
+No se publicaron datos ni cambios en el portal Cloudflare real.
+
+EVIDENCIAS Y FUENTES
+Rama GitHub: trabajo/portal-web
+Carpeta editable: portal-web/FIX-PORTAL-002
+Bitácora general: portal-web/REGISTRO_FIX.txt
+Los comandos de pruebas y el empaquetador están en esa carpeta;
+no son necesarios para el reemplazo manual de este paquete.

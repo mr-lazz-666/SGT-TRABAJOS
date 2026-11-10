@@ -1,0 +1,115 @@
+SGT - INTEGRACIÓN MANUAL - FIX-PORTAL-002
+Compatible como reemplazo directo con el ZIP de referencia:
+SGT_FIX23_PRESIDENTES_AUTOMATICOS.zip depurado del propietario.
+
+1. UBICAR SU PROYECTO
+Abra la carpeta del proyecto que contiene:
+
+SGT_FIX23_PRESIDENTES_AUTOMATICOS\
+    SGT_APLICACION\
+    SERVIDOR_CLOUDFLARE\
+        worker.js
+        schema.sql
+        wrangler.toml
+        package.json
+
+Use el proyecto correspondiente al portal que ya tiene publicado.
+No utilice una configuración vacía para sobrescribir la que funciona.
+
+2. RESPALDAR EL ARCHIVO ACTUAL
+Copie SERVIDOR_CLOUDFLARE\worker.js a una carpeta de respaldo
+FUERA de SERVIDOR_CLOUDFLARE. Conserve fecha y nombre del respaldo.
+Si el archivo actual difiere de la base indicada en SHA256.txt,
+revise antes de reemplazar: podría contener otros cambios propios.
+
+3. REEMPLAZAR UN ÚNICO ARCHIVO
+Descomprima este paquete en una carpeta aparte.
+Copie su archivo SERVIDOR_CLOUDFLARE\worker.js y péguelo sobre
+el worker.js de la misma ruta en el proyecto real.
+Acepte REEMPLAZAR ARCHIVO.
+
+También puede arrastrar la carpeta SERVIDOR_CLOUDFLARE del paquete
+sobre la raíz del proyecto, aceptando combinar carpetas y reemplazar
+solo worker.js. NO borre antes la carpeta de destino.
+No necesita pegar fragmentos ni copiar los HTML/CSS/JS editables.
+El worker.js entregado ya los contiene, incluido el logo municipal.
+
+4. CONSERVAR CONFIGURACIÓN Y DATOS
+Deje sin cambios schema.sql, wrangler.toml, package.json,
+SGT_CLOUD_CONFIG.json, cloud_config.json, tokens y la base existente.
+Este FIX no modifica SGT_APLICACION ni las cuentas existentes.
+No copie credenciales de la réplica: no forman parte de esta entrega.
+
+5. PUBLICAR EL PORTAL ACTUALIZADO
+Reemplazar el archivo en su PC NO actualiza el portal publicado.
+Necesita Node.js/npm y acceso a la misma cuenta Cloudflare del portal.
+
+Desde la carpeta SERVIDOR_CLOUDFLARE, abra una terminal y ejecute:
+
+    npm install
+    npx wrangler whoami
+
+Si no ha iniciado sesión:
+
+    npx wrangler login
+
+Compruebe que la cuenta es la correcta y que wrangler.toml conserva
+el nombre del Worker, el binding DB y el database_id del portal real.
+Si database_id dice REEMPLAZAR_POR_ID_REAL, deténgase y recupere la
+configuración que ya usa su portal; este paquete no configura D1.
+
+Para revisar sintaxis:
+
+    node --check worker.js
+
+Para publicar el cambio en el Worker configurado:
+
+    npx wrangler deploy
+
+No ejecute schema.sql, db:init ni cree una nueva base para este FIX.
+No es necesario generar otra vez SGT.exe ni el instalador.
+No use CREAR_INSTALADOR_Y_PUBLICAR.bat solo para cambiar el diseño:
+ese proceso tiene otras responsabilidades y no es necesario aquí.
+
+Si dispone de un entorno de ensayo, valide allí antes de producción.
+No ejecute los comandos a ciegas sobre una cuenta o Worker distintos.
+
+6. ABRIR LA PORTADA
+Abra la URL raíz que mostró Wrangler, SIN /vecinos al final.
+En el proyecto de referencia:
+
+    https://sgt-portales.alvaroeyzaguirre3.workers.dev/
+
+Opcionalmente copie ABRIR_PORTAL_SGT.bat a la raíz del proyecto
+y ejecútelo. Abre esa URL; no instala ni publica nada.
+Si su portal usa otro dominio, cambie solamente SGT_PORTAL_URL
+dentro de ese .bat por su URL raíz.
+
+Las rutas directas siguen disponibles:
+    /vecinos
+    /presidentes
+    /seguimiento
+
+El .bat antiguo continúa abriendo formularios directamente.
+Para ver primero las dos opciones, use la raíz o el nuevo .bat.
+
+7. COMPROBAR DESPUÉS DE PUBLICAR
+- Portada: Vecinos y Presidentes llevan al lugar correspondiente.
+- Las explicaciones aparecen con mouse/teclado y son visibles en móvil.
+- Los tres temas cambian y la selección se conserva en el navegador.
+- Vecinos conserva sus juntas y los campos habituales.
+- En un ensayo autorizado, el envío devuelve un código de seguimiento.
+- Seguimiento reconoce el código y muestra el estado.
+- Presidentes accede con su cuenta real existente y ve su junta.
+- Aceptar/rechazar conserva las reglas anteriores.
+- SGT recibe y procesa las aceptadas con su sincronización habitual.
+No use datos personales reales para una prueba de ensayo.
+
+8. VOLVER A LA VERSIÓN ANTERIOR
+Restaure el worker.js respaldado y ejecute otra vez:
+
+    npx wrangler deploy
+
+No restaure ni elimine bases por un cambio visual.
+El tema de color es una preferencia local del navegador;
+no modifica la base de datos municipal.

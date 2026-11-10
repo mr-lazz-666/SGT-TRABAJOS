@@ -12,7 +12,10 @@ def render(name):
  js=(src/'compartido/portal.js').read_text()+('\n'+(src/name/(name+'.js')).read_text() if name!='inicio' else '')
  body=header+(src/name/'index.html').read_text()+footer
  for key,value in paths.items():body=body.replace('{{'+key+'}}',value)
- body=body.replace('{{LOGO}}',logo).replace('{{PICKER}}','')
+ picker=(src/'compartido/selector-tema.html').read_text()
+ if name=='inicio':body=body.replace('{{PICKER}}',picker)
+ else:body=body.replace(footer,'<div class="portal-theme-wrap">'+picker+'</div>'+footer)
+ body=body.replace('{{LOGO}}',logo)
  return '<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#081727"><title>'+({'inicio':'Portal SGT · Vecinos y Presidentes'}.get(name,name.capitalize()+' | SGT'))+'</title><style>'+css+'</style></head><body>'+body+'<script>'+js+'</script></body></html>'
 original=args.worker_base.read_text();lines=original.splitlines(keepends=True)
 i=next(i for i,l in enumerate(lines) if l.startswith('const page='));old=lines[i]
