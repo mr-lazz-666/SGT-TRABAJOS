@@ -25,6 +25,8 @@ Capturas: [mapa de administrador](evidencias/administrador-mapa.png), [importaci
 
 PASS describe exclusivamente la comprobación registrada. No certifica todo el módulo ni todos sus casos de borde.
 
+| Comprobación final | Resultado |
+|---|---|
 | Ventana nativa al finalizar | Confirmada: SGT Municipal - San Bernardo; seis procesos msedgewebview2.exe. No se consiguió automatizar por CDP |
 | Persistencia al cerrar y reabrir el ejecutable | Correcta: una junta y ocho solicitudes antes y después del reinicio |
 
