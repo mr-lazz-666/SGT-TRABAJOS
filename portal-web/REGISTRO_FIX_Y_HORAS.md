@@ -92,3 +92,33 @@ Horas por actividad = minutos acumulados / 60. El total activo excluye las esper
 | Trabajo activo registrado | — | — |
 | Espera automática registrada | — | — |
 | Horas aprobadas para imputación | — | — |
+
+## Contrato de entrega para reemplazo directo
+
+El destinatario de cada entrega es una persona que ya tiene SGT real. La entrega debe conservar la arquitectura del ZIP y permitir identificar qué archivos reemplazar sin adaptar el código manualmente.
+
+| Criterio | Compromiso de entrega |
+|---|---|
+| Fuente de referencia | ZIP vigente; comprobar versión antes de preparar el reemplazo |
+| Ruta de destino | Conservar la ruta original, por ejemplo `SERVIDOR_CLOUDFLARE/worker.js` |
+| Contenido | Archivos completos; no fragmentos para pegar |
+| Interfaz del portal | Mantener HTML, CSS y JavaScript en `worker.js` mientras esa sea la arquitectura original |
+| Funcionamiento | Preservar rutas API, nombres de campos, permisos, estados y sincronización salvo cambio funcional expresamente solicitado |
+| Datos y configuración | No sustituir bases, configuración local ni configuración de Cloudflare sin necesidad y autorización |
+| Adaptadores de preview | Excluir `portal-demo.js`, `replica-runtime.js`, cuentas y datos ficticios de la entrega real |
+| Prueba de integración | Registrar qué recorridos se verificaron sobre el archivo de entrega y cuáles están pendientes; no inferir compatibilidad solo por la preview |
+| Publicación remota | Reemplazar el archivo local del Worker no actualiza Cloudflare: se debe volver a publicar mediante el procedimiento de despliegue del proyecto |
+| Reversión | Indicar qué archivo anterior conservar y cómo restaurarlo y publicarlo nuevamente |
+| Estado del paquete | Diferenciar candidato de preview, entrega aprobada y versión aplicada |
+
+Estructura prevista de cada paquete de reemplazo, ajustada a los archivos realmente modificados:
+
+```text
+FIX-PORTAL-XXX/
+├── SERVIDOR_CLOUDFLARE/
+│   └── worker.js
+├── INSTRUCCIONES.md
+└── REGISTRO_FIX.md
+```
+
+Esta sección documenta el criterio indicado por el propietario. Todavía no se ha preparado un reemplazo funcional: el primer apartado y el cambio concreto serán indicados por el propietario.
