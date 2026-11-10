@@ -1,0 +1,16 @@
+const vm=require('node:vm'),fs=require('node:fs'),assert=require('node:assert/strict');
+const storage=()=>{const data=new Map();return{getItem:k=>data.get(k)||null,setItem:(k,v)=>data.set(k,String(v)),removeItem:k=>data.delete(k)}};
+const ctx={window:{fetch:async()=>{throw Error('No production requests allowed')}},localStorage:storage(),sessionStorage:storage(),location:{href:'https://demo.invalid/portales/vecinos.html',origin:'https://demo.invalid'},crypto:require('node:crypto').webcrypto,Headers,Response,URL,console};vm.createContext(ctx);vm.runInContext(fs.readFileSync(require('node:path').join(__dirname,'../app/assets/js/portal-demo.js'),'utf8'),ctx);
+(async()=>{const api=async(p,b,t)=>{let r=await ctx.window.fetch(p,{method:b?'POST':'GET',headers:t?{authorization:'Bearer '+t}:{},body:b?JSON.stringify(b):undefined});return{status:r.status,body:await r.json()}};
+ const j=(await api('/api/juntas')).body.juntas;assert.equal(j.length,3);
+ assert.equal((await api('/api/solicitudes',{})).status,400);
+ const created=await api('/api/solicitudes',{junta_id:j[0].id,nombre:'Persona de ensayo',direccion:'Domicilio ficticio',contacto:'Contacto ficticio',requerimiento:'Requerimiento de prueba'});assert.equal(created.status,201);
+ const code=created.body.codigo;assert.equal((await api('/api/seguimiento/'+code)).body.estado,'pendiente_presidente');
+ assert.equal((await api('/api/presidente/solicitudes')).status,401);
+ const p=(await api('/api/presidente/login',{usuario:'presidente',password:'SGTdemo2026'})).body.token;
+ assert.equal((await api('/api/presidente/solicitudes',null,p)).body.solicitudes.length,1);
+ assert.equal((await api('/api/presidente/decision',{codigo:code,estado:'aceptada_presidente'},p)).status,200);
+ const status=(await api('/api/seguimiento/'+code)).body;assert.equal(status.estado,'aceptada_presidente');assert.equal(status.eventos.length,2);
+ assert.equal((await api('/api/presidente/decision',{codigo:code,estado:'rechazada_presidente'},p)).status,409);
+ console.log('PASS: juntas, validación, envío local, código, seguimiento, acceso presidente, aceptación e historial; ninguna petición a producción');
+})().catch(e=>{console.error(e);process.exit(1)});
