@@ -16,6 +16,14 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
+      - name: Preparar cuentas de prueba existentes
+        shell: bash
+        env:
+          INSTALLER_KEY: ${{ secrets.SGT_INSTALLER_KEY }}
+        run: |
+          set -euo pipefail
+          git fetch --depth=1 origin refs/heads/pruebas/instalador-windows
+          git show FETCH_HEAD:pruebas/instalador-windows/cuentas.json.enc | openssl enc -d -aes-256-cbc -pbkdf2 -iter 200000 -pass env:INSTALLER_KEY -out "$RUNNER_TEMP/cuentas-prueba.json"
       - name: Descargar el instalador y verificar las pantallas del programa instalado
         shell: pwsh
         env:
@@ -23,6 +31,6 @@ jobs:
         run: |
           gh release download pruebas-instaladores-2026-11-25 --pattern SGT_Instalador_Cliente_CM.exe --dir "$env:RUNNER_TEMP"
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
-          python -m pip install pyinstaller==6.16.0
+          python -m pip install pyinstaller==6.16.0 playwright
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           python pruebas/arquitectura-instaladores/comprobar_cliente.py

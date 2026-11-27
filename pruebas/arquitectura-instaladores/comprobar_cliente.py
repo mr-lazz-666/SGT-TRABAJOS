@@ -8,6 +8,7 @@ import subprocess
 import time
 import urllib.request
 
+from playwright.sync_api import sync_playwright
 from PyInstaller.archive.readers import CArchiveReader
 
 temp = Path(os.environ["RUNNER_TEMP"])
@@ -56,6 +57,29 @@ try:
         for marker in markers:
             assert marker in html, (page, marker)
         print("Verificado en el servidor local del ejecutable:", page)
+    accounts = json.loads((temp / "cuentas-prueba.json").read_text(encoding="utf-8-sig"))
+    with sync_playwright() as playwright:
+        browser = playwright.chromium.launch(channel="msedge")
+        for role in ["ADMINISTRADOR", "FUNCIONARIO"]:
+            ctx = browser.new_context()
+            ctx.route("**/*", lambda route: route.continue_() if route.request.url.startswith(root) else route.abort())
+            page = ctx.new_page()
+            page.goto(root + "index.html")
+            page.locator("#usuarioInput").select_option(role)
+            page.locator("#passwordInput").fill(accounts[role])
+            page.locator("#passwordInput").press("Enter")
+            page.wait_for_url("**/inicio.html")
+            for screen in screens:
+                page.goto(root + "pages/" + screen + ".html", wait_until="domcontentloaded")
+                page.locator("h1").first.wait_for()
+                assert page.url.endswith(screen + ".html")
+                if screen == "cargar-excel":
+                    assert page.locator("#btnPlantillaSGT").is_visible() == (role == "ADMINISTRADOR")
+                if screen == "entrantes-web":
+                    assert not page.locator("#dev-tools").is_visible()
+                print("Pantalla abierta en el escritorio instalado:", role, screen)
+            ctx.close()
+        browser.close()
 finally:
     if app.poll() is None:
         subprocess.run(["taskkill", "/PID", str(app.pid), "/T", "/F"], check=False)
