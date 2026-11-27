@@ -1,0 +1,28 @@
+name: Contrastar pantallas del Cliente SGT
+on:
+  push:
+    branches: [pruebas/arquitectura-instaladores]
+    paths:
+      - .github/workflows/comprobar-cliente.yml
+      - pruebas/arquitectura-instaladores/comprobar_cliente.py
+permissions:
+  contents: read
+jobs:
+  cliente:
+    runs-on: windows-2022
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - name: Descargar el instalador y verificar las pantallas del programa instalado
+        shell: pwsh
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          gh release download pruebas-instaladores-2026-11-25 --pattern SGT_Instalador_Cliente_CM.exe --dir "$env:RUNNER_TEMP"
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python -m pip install pyinstaller==6.16.0
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          python pruebas/arquitectura-instaladores/comprobar_cliente.py
